@@ -1,0 +1,9 @@
+/* Aurora - weiche Farbwolken */
+.mgd-t-aurora .mgd-login-bg { background: radial-gradient(120% 90% at 50% 0%, var(--mgd-bg2), var(--mgd-bg1) 70%); }
+.mgd-t-aurora .mgd-login-bg > span { border-radius: 50%; filter: blur(70px); opacity: .62; mix-blend-mode: screen; will-change: transform; }
+.mgd-t-aurora .mgd-login-bg > span:nth-child(1) { width: 46vmax; height: 46vmax; left: -12vmax; top: -14vmax; background: var(--mgd-accent); animation: mgd-aur-a calc(24s / var(--mgd-speed)) ease-in-out infinite alternate; }
+.mgd-t-aurora .mgd-login-bg > span:nth-child(2) { width: 40vmax; height: 40vmax; right: -10vmax; bottom: -14vmax; background: color-mix(in srgb, var(--mgd-accent) 45%, #00d4ff); animation: mgd-aur-b calc(28s / var(--mgd-speed)) ease-in-out infinite alternate; }
+.mgd-t-aurora .mgd-login-bg > span:nth-child(3) { width: 30vmax; height: 30vmax; left: 38%; top: 32%; background: color-mix(in srgb, var(--mgd-accent) 50%, #ff4fd8); opacity: .4; animation: mgd-aur-c calc(32s / var(--mgd-speed)) ease-in-out infinite alternate; }
+@keyframes mgd-aur-a { to { transform: translate(18vmax, 12vmax) scale(1.2); } }
+@keyframes mgd-aur-b { to { transform: translate(-16vmax, -10vmax) scale(1.25); } }
+@keyframes mgd-aur-c { to { transform: translate(-14vmax, 10vmax) scale(.8); } }

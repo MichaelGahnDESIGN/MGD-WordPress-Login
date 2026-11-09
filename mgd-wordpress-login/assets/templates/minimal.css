@@ -1,0 +1,6 @@
+/* Minimal Clean - ruhig, ein weicher Lichtfleck */
+.mgd-t-minimal .mgd-login-bg > span:nth-child(1) { width: 60vmax; height: 60vmax; left: -20vmax; top: -30vmax; border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--mgd-accent) 14%, transparent), transparent); animation: mgd-mi-drift calc(30s / var(--mgd-speed)) ease-in-out infinite alternate; }
+.mgd-t-minimal .mgd-login-bg > span:nth-child(2) { width: 50vmax; height: 50vmax; right: -16vmax; bottom: -26vmax; border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--mgd-accent) 10%, transparent), transparent); animation: mgd-mi-drift calc(36s / var(--mgd-speed)) ease-in-out infinite alternate-reverse; }
+.mgd-t-minimal .mgd-login-bg > span:nth-child(3) { display: none; }
+@keyframes mgd-mi-drift { to { transform: translate(8vmax, 6vmax); } }
+body.mgd-t-minimal #login form { box-shadow: 0 1px 2px rgba(20, 30, 40, .06), 0 24px 48px -24px rgba(20, 30, 40, .22); border-color: rgba(20, 30, 40, .08); }

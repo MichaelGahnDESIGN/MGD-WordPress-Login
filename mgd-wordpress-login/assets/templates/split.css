@@ -1,0 +1,20 @@
+/* Split Screen - links Marke, rechts Formular */
+body.login.mgd-t-split { align-items: stretch; justify-content: center; padding: 28px 28px 28px 55%; background: var(--mgd-card); }
+.mgd-t-split .mgd-login-bg { right: auto; width: 55%; }
+body.mgd-t-split #login { align-self: center; margin: 0 auto; }
+body.mgd-t-split #login form { background: transparent; border: 0; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; padding-left: 0; padding-right: 0; }
+.mgd-t-split .mgd-login-footer, .mgd-t-split .privacy-policy-page-link { align-self: center; }
+.mgd-t-split .mgd-login-bg > span:nth-child(1) { width: 60vmin; height: 60vmin; right: -14vmin; top: -10vmin; border: 2px solid rgba(255, 255, 255, .22); border-radius: 50%; animation: mgd-sp-spin calc(40s / var(--mgd-speed)) linear infinite; }
+.mgd-t-split .mgd-login-bg > span:nth-child(2) { width: 34vmin; height: 34vmin; left: -8vmin; bottom: 4vmin; border-radius: 50%; background: linear-gradient(135deg, rgba(255, 255, 255, .22), rgba(255, 255, 255, 0)); animation: mgd-sp-float calc(12s / var(--mgd-speed)) ease-in-out infinite alternate; }
+.mgd-t-split .mgd-login-bg > span:nth-child(3) { width: 24vmin; height: 24vmin; right: 12%; bottom: 16%; border: 2px solid rgba(255, 255, 255, .3); border-radius: 50%; animation: mgd-sp-float calc(9s / var(--mgd-speed)) ease-in-out infinite alternate-reverse; }
+@keyframes mgd-sp-spin { to { transform: rotate(360deg); } }
+@keyframes mgd-sp-float { to { transform: translate(3vmin, -5vmin) scale(1.08); } }
+.mgd-t-split .mgd-login-hero { display: block; position: absolute; z-index: 4; left: 9%; right: 9%; bottom: 12%; color: #fff; }
+.mgd-t-split .mgd-login-hero strong { display: block; font-size: clamp(28px, 4vw, 56px); line-height: 1.1; font-weight: 800; letter-spacing: -.02em; overflow-wrap: anywhere; }
+.mgd-t-split .mgd-login-hero em { display: block; margin-top: 12px; font-style: normal; font-size: clamp(15px, 1.4vw, 19px); opacity: .85; }
+@media (max-width: 860px) {
+	body.login.mgd-t-split { padding: 28px 16px; background: var(--mgd-bg1); }
+	.mgd-t-split .mgd-login-bg { width: 100%; }
+	.mgd-t-split .mgd-login-hero { display: none; }
+	body.mgd-t-split #login form { background: color-mix(in srgb, var(--mgd-card) 94%, transparent); padding: 26px 22px; border-radius: 14px; }
+}

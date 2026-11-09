@@ -1,0 +1,23 @@
+/* Neon Grid - Raster läuft, Karte pulsiert */
+.mgd-t-neon .mgd-login-bg > span:nth-child(1) {
+	left: -50%; right: -50%; bottom: -12%; height: 68%;
+	background-image: linear-gradient(var(--mgd-accent) 1px, transparent 1px), linear-gradient(90deg, var(--mgd-accent) 1px, transparent 1px);
+	background-size: 64px 64px;
+	opacity: .4;
+	transform: perspective(520px) rotateX(64deg);
+	-webkit-mask-image: linear-gradient(to top, #000, transparent 88%);
+	mask-image: linear-gradient(to top, #000, transparent 88%);
+	animation: mgd-ne-grid calc(2.4s / var(--mgd-speed)) linear infinite;
+}
+.mgd-t-neon .mgd-login-bg > span:nth-child(2) { left: 50%; top: -18%; width: 60vmax; height: 40vmax; margin-left: -30vmax; border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--mgd-accent) 55%, #ff2bd6), transparent); opacity: .45; filter: blur(30px); animation: mgd-ne-glow calc(6s / var(--mgd-speed)) ease-in-out infinite alternate; }
+.mgd-t-neon .mgd-login-bg > span:nth-child(3) { left: 0; right: 0; top: 0; height: 22%; background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--mgd-accent) 14%, transparent), transparent); animation: mgd-ne-scan calc(7s / var(--mgd-speed)) linear infinite; }
+@keyframes mgd-ne-grid { to { background-position: 0 64px; } }
+@keyframes mgd-ne-glow { to { opacity: .75; transform: scale(1.12); } }
+@keyframes mgd-ne-scan { from { transform: translateY(-120%); } to { transform: translateY(520%); } }
+body.mgd-t-neon #login form { border-color: color-mix(in srgb, var(--mgd-accent) 70%, transparent); animation: mgd-ne-pulse calc(3.4s / var(--mgd-speed)) ease-in-out infinite alternate; }
+@keyframes mgd-ne-pulse {
+	from { box-shadow: 0 0 0 1px color-mix(in srgb, var(--mgd-accent) 30%, transparent), 0 0 24px -4px color-mix(in srgb, var(--mgd-accent) 45%, transparent); }
+	to { box-shadow: 0 0 0 1px color-mix(in srgb, var(--mgd-accent) 60%, transparent), 0 0 54px -2px color-mix(in srgb, var(--mgd-accent) 75%, transparent); }
+}
+body.mgd-t-neon #login .button-primary { box-shadow: 0 0 22px -2px color-mix(in srgb, var(--mgd-accent) 80%, transparent); }
+body.mgd-t-neon.mgd-logo-name #login h1 a { text-shadow: 0 0 18px color-mix(in srgb, var(--mgd-accent) 70%, transparent); }

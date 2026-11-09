@@ -1,0 +1,6 @@
+/* Partikel-Netz - Canvas wird per JS eingefügt, hier nur Rahmen */
+.mgd-t-particles .mgd-login-bg { background: radial-gradient(90% 80% at 50% 40%, var(--mgd-bg2), var(--mgd-bg1)); }
+.mgd-t-particles .mgd-login-bg > span { display: none; }
+/* Ohne JS oder bei Animation aus: ruhiger Lichtfleck statt Netz */
+.mgd-t-particles .mgd-login-bg > span:nth-child(1) { display: block; left: 50%; top: 50%; width: 60vmin; height: 60vmin; margin: -30vmin 0 0 -30vmin; border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--mgd-accent) 22%, transparent), transparent); }
+body.mgd-t-particles #login form { border-color: color-mix(in srgb, var(--mgd-accent) 35%, transparent); }

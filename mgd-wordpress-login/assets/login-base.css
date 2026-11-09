@@ -1,0 +1,258 @@
+/* MGD WordPress Login - Basis für alle Templates. Farben kommen als --mgd-* Variablen. */
+
+body.login.mgd-login {
+	--mgd-muted: color-mix(in srgb, var(--mgd-text) 72%, transparent);
+	--mgd-field: color-mix(in srgb, var(--mgd-text) 7%, transparent);
+	--mgd-line: color-mix(in srgb, var(--mgd-text) 20%, transparent);
+	min-height: 100vh;
+	min-width: 0;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 28px 16px;
+	background: var(--mgd-bg1);
+	color: var(--mgd-text);
+	font-family: var(--mgd-font);
+	position: relative;
+}
+
+/* Hintergrund Ebene */
+.mgd-login-bg {
+	position: fixed;
+	inset: 0;
+	z-index: 0;
+	overflow: hidden;
+	pointer-events: none;
+	background: linear-gradient(135deg, var(--mgd-bg1), var(--mgd-bg2));
+}
+.mgd-login-bg::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: 1;
+	background: var(--mgd-bg-image) center / cover no-repeat;
+}
+.mgd-login-bg::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: 2;
+	background: color-mix(in srgb, var(--mgd-bg1) var(--mgd-overlay), transparent);
+}
+.mgd-login-bg > span { position: absolute; z-index: 3; display: block; }
+.mgd-login-bg canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 3; }
+.mgd-login-hero { display: none; }
+.mgd-has-bg .mgd-login-bg > span { opacity: .4; }
+
+/* Login Box */
+body.mgd-login #login {
+	position: relative;
+	z-index: 2;
+	width: min(var(--mgd-card-width), 100%);
+	margin: 0 auto;
+	padding: 0;
+}
+/* Einblenden pro Element, nicht auf #login (sonst geht backdrop-filter kaputt) */
+body.mgd-login #login > * { animation: mgd-rise .8s cubic-bezier(.2, .8, .2, 1) backwards; }
+body.mgd-login #login > form { animation-delay: .08s; }
+body.mgd-login #login > #nav, body.mgd-login #login > #backtoblog { animation-delay: .18s; }
+@keyframes mgd-rise {
+	from { opacity: 0; transform: translateY(22px) scale(.98); }
+	to { opacity: 1; transform: none; }
+}
+
+/* Logo oder Seitenname */
+body.mgd-login #login h1 { margin: 0; text-align: center; }
+body.mgd-login.mgd-logo-image #login h1 a,
+body.mgd-login.mgd-logo-name #login h1 a {
+	display: block;
+	width: 100%;
+	height: var(--mgd-logo-h);
+	margin: 0 auto 6px;
+	overflow: hidden;
+	outline-offset: 4px;
+}
+body.mgd-login.mgd-logo-image #login h1 a {
+	background: var(--mgd-logo) center / contain no-repeat;
+	text-indent: -9999px;
+}
+body.mgd-login.mgd-logo-name #login h1 a {
+	height: auto;
+	background: none;
+	text-indent: 0;
+	overflow: visible;
+	padding: 6px 0;
+	color: var(--mgd-text);
+	font-size: 28px;
+	font-weight: 700;
+	line-height: 1.2;
+	letter-spacing: -.01em;
+	overflow-wrap: anywhere;
+}
+body.mgd-login.mgd-logo-none #login h1 { display: none; }
+
+/* Begrüßung */
+.mgd-login-welcome { text-align: center; margin: 14px 0 0; }
+.mgd-login-welcome h2 { margin: 0; color: var(--mgd-text); font-size: 22px; font-weight: 700; line-height: 1.25; }
+.mgd-login-welcome p { margin: 6px 0 0; color: var(--mgd-muted); font-size: 14px; line-height: 1.5; }
+
+/* Karte (alle Formulare: Login, Passwort vergessen, Registrieren) */
+body.mgd-login #login form {
+	margin: 20px 0 0;
+	padding: 30px 28px 28px;
+	overflow: visible;
+	color: var(--mgd-text);
+	background: color-mix(in srgb, var(--mgd-card) var(--mgd-card-pct), transparent);
+	border: 1px solid var(--mgd-line);
+	border-radius: var(--mgd-radius);
+	box-shadow: 0 30px 80px -24px rgba(0, 0, 0, .5);
+	-webkit-backdrop-filter: blur(var(--mgd-blur)) saturate(140%);
+	backdrop-filter: blur(var(--mgd-blur)) saturate(140%);
+}
+body.mgd-login #login form label,
+body.mgd-login #login form p { color: var(--mgd-text); }
+body.mgd-login #login form label { font-size: 14px; font-weight: 600; }
+
+/* Eingabefelder */
+body.mgd-login #login form .input,
+body.mgd-login #login input[type="text"],
+body.mgd-login #login input[type="password"],
+body.mgd-login #login input[type="email"] {
+	box-sizing: border-box;
+	width: 100%;
+	min-height: 48px;
+	margin: 4px 0 16px;
+	padding: 12px 14px;
+	font-size: 16px;
+	color: var(--mgd-text);
+	background: var(--mgd-field);
+	border: 1px solid var(--mgd-line);
+	border-radius: max(4px, calc(var(--mgd-radius) * .5));
+	box-shadow: none;
+	transition: border-color .2s, box-shadow .2s, background .2s;
+}
+body.mgd-login #login form .input:focus,
+body.mgd-login #login input[type="text"]:focus,
+body.mgd-login #login input[type="password"]:focus,
+body.mgd-login #login input[type="email"]:focus {
+	border-color: var(--mgd-accent);
+	box-shadow: 0 0 0 3px color-mix(in srgb, var(--mgd-accent) 40%, transparent);
+	outline: 2px solid transparent;
+}
+body.mgd-login #login .wp-pwd { position: relative; }
+body.mgd-login #login input.password-input { padding-right: 52px; }
+body.mgd-login #login .button.wp-hide-pw {
+	position: absolute;
+	right: 0;
+	top: 4px;
+	width: 48px;
+	height: 48px;
+	min-height: 48px;
+	margin: 0;
+	padding: 0;
+	color: var(--mgd-muted);
+	background: none;
+	border: 0;
+	box-shadow: none;
+}
+body.mgd-login #login .button.wp-hide-pw:hover,
+body.mgd-login #login .button.wp-hide-pw:focus { color: var(--mgd-accent); background: none; }
+body.mgd-login #login .button.wp-hide-pw:focus { box-shadow: 0 0 0 2px var(--mgd-accent); outline: 2px solid transparent; }
+
+/* Checkbox */
+body.mgd-login #login input[type="checkbox"] {
+	width: 18px;
+	height: 18px;
+	margin: 0 6px 0 0;
+	vertical-align: -3px;
+	background: var(--mgd-field);
+	border: 1px solid var(--mgd-line);
+	border-radius: 4px;
+	box-shadow: none;
+}
+body.mgd-login #login input[type="checkbox"]:checked { background: var(--mgd-accent); border-color: var(--mgd-accent); }
+body.mgd-login #login input[type="checkbox"]:checked::before { content: ""; display: block; margin: 3px 0 0 5px; width: 4px; height: 8px; border: solid var(--mgd-btn-text); border-width: 0 2px 2px 0; transform: rotate(45deg); }
+body.mgd-login #login input[type="checkbox"]:focus { box-shadow: 0 0 0 3px color-mix(in srgb, var(--mgd-accent) 40%, transparent); }
+body.mgd-login #login form .forgetmenot { float: none; margin: 2px 0 18px; }
+
+/* Button */
+body.mgd-login #login .submit { margin: 0; }
+body.mgd-login #login .button-primary,
+body.mgd-login #login .button-primary.button-large {
+	float: none;
+	width: 100%;
+	min-height: 50px;
+	margin: 0;
+	padding: 0 22px;
+	font-size: 16px;
+	font-weight: 700;
+	letter-spacing: .01em;
+	color: var(--mgd-btn-text);
+	text-shadow: none;
+	background: var(--mgd-accent);
+	border: 0;
+	border-radius: max(4px, calc(var(--mgd-radius) * .5));
+	box-shadow: 0 14px 32px -12px color-mix(in srgb, var(--mgd-accent) 80%, transparent);
+	transition: transform .15s, filter .15s, box-shadow .2s;
+}
+body.mgd-login #login .button-primary:hover { filter: brightness(1.08); transform: translateY(-1px); }
+body.mgd-login #login .button-primary:active { transform: translateY(0); filter: brightness(.96); }
+body.mgd-login #login .button-primary:focus { box-shadow: 0 0 0 3px var(--mgd-card), 0 0 0 6px var(--mgd-accent); outline: 2px solid transparent; }
+
+/* Links unter dem Formular */
+body.mgd-login #login #nav,
+body.mgd-login #login #backtoblog { margin: 18px 0 0; padding: 0; text-align: center; font-size: 14px; }
+body.mgd-login #login #nav a,
+body.mgd-login #login #backtoblog a,
+body.mgd-login .privacy-policy-page-link a {
+	color: var(--mgd-muted);
+	text-decoration: underline;
+	text-underline-offset: 3px;
+	text-decoration-color: transparent;
+	transition: color .2s, text-decoration-color .2s;
+}
+body.mgd-login #login #nav a:hover,
+body.mgd-login #login #backtoblog a:hover,
+body.mgd-login .privacy-policy-page-link a:hover { color: var(--mgd-accent); text-decoration-color: currentColor; }
+body.mgd-login #login #nav a:focus,
+body.mgd-login #login #backtoblog a:focus,
+body.mgd-login .privacy-policy-page-link a:focus { color: var(--mgd-accent); box-shadow: none; outline: 2px solid var(--mgd-accent); outline-offset: 3px; }
+body.mgd-hide-back #login #backtoblog { display: none; }
+body.mgd-login .privacy-policy-page-link { position: relative; z-index: 2; margin: 18px 0 0; width: auto; }
+
+/* Meldungen und Fehler */
+body.mgd-login #login .message,
+body.mgd-login #login .success,
+body.mgd-login #login #login_error,
+body.mgd-login #login .notice {
+	margin: 18px 0 0;
+	padding: 12px 14px;
+	color: var(--mgd-text);
+	background: color-mix(in srgb, var(--mgd-card) 82%, transparent);
+	border: 1px solid var(--mgd-line);
+	border-left: 4px solid var(--mgd-accent);
+	border-radius: max(4px, calc(var(--mgd-radius) * .5));
+	box-shadow: none;
+	-webkit-backdrop-filter: blur(var(--mgd-blur));
+	backdrop-filter: blur(var(--mgd-blur));
+}
+body.mgd-login #login #login_error { border-left-color: #ff5d6c; }
+body.mgd-login #login .message a,
+body.mgd-login #login #login_error a { color: var(--mgd-accent); }
+
+/* Fußzeile und Sprache */
+.mgd-login-footer { position: relative; z-index: 2; max-width: min(var(--mgd-card-width), 100%); margin: 22px auto 0; text-align: center; font-size: 13px; line-height: 1.5; color: var(--mgd-muted); }
+.mgd-login-footer a { color: var(--mgd-text); }
+body.mgd-login .language-switcher { position: relative; z-index: 2; }
+body.mgd-login .language-switcher label, body.mgd-login .language-switcher .dashicons { color: var(--mgd-muted); }
+
+/* Animation aus oder System wünscht wenig Bewegung */
+body.mgd-no-anim *, body.mgd-no-anim *::before, body.mgd-no-anim *::after { animation: none !important; }
+@media (prefers-reduced-motion: reduce) {
+	body.mgd-login *, body.mgd-login *::before, body.mgd-login *::after { animation: none !important; transition-duration: .01ms !important; }
+}
+@media (max-width: 480px) {
+	body.mgd-login #login form { padding: 24px 18px 22px; }
+}
