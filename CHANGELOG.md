@@ -1,6 +1,6 @@
 # Änderungen
 
-## Noch nicht veröffentlicht
+## 0.1.4 (Vorabversion)
 
 - Logo: „Logo-Höhe“ wirkt jetzt auch bei breiten Logos. Das Logo darf dafür breiter als die Karte sein (höchstens 480 Pixel, auf dem Handy so breit wie der Bildschirm)
 - Logo: SVG-Logos (Vektorgrafiken) werden richtig eingepasst
