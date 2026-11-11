@@ -1,5 +1,15 @@
 # Änderungen
 
+## 0.1.2 (Vorabversion)
+
+- Neuer Update-Weg wie bei den anderen MGD Plugins: Die neue Version und ihr Fingerabdruck (SHA-256) kommen von theme.michael-gahn.de, die ZIP-Datei aus dem GitHub-Release
+- Vor dem Einspielen wird die ZIP-Datei geprüft. Passt der Fingerabdruck nicht, wird nichts installiert
+- Downloads nur über HTTPS und nur von GitHub-Adressen
+- Keine automatischen Updates, du klickst selbst
+- Ist theme.michael-gahn.de nicht erreichbar, wird einfach kein Update angezeigt
+- Die alte Update-Prüfung direkt über GitHub ist für dieses Plugin abgeschaltet
+- Neue Tests für den Update-Weg (`php tests/updater.php`)
+
 ## 0.1.1 (Vorabversion)
 
 - Aufgeräumt: zwei übrig gebliebene Hilfsdateien vom Netzlaufwerk aus dem Projekt entfernt
