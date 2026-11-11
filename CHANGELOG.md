@@ -1,5 +1,9 @@
 # Änderungen
 
+## Noch nicht veröffentlicht
+
+- Abstand oben: Auf kleineren Bildschirmen ist die Seite beim Öffnen nach unten gesprungen (WordPress setzt den Cursor ins Namensfeld). Jetzt bleibt die Seite oben und das Logo ist sichtbar. Der Cursor steht trotzdem im Feld
+
 ## 0.1.4 (Vorabversion)
 
 - Logo: „Logo-Höhe“ wirkt jetzt auch bei breiten Logos. Das Logo darf dafür breiter als die Karte sein (höchstens 480 Pixel, auf dem Handy so breit wie der Bildschirm)

@@ -213,6 +213,8 @@ final class MGD_Login_Frontend {
 	}
 
 	public static function footer(): void {
+		// WP fokussiert das Feld per setTimeout > Seite scrollt, Logo oben weg. Fokus ja, scrollen nein
+		echo '<script>(function(){["user_login","user_pass","user_email"].forEach(function(id){var el=document.getElementById(id);if(!el){return;}var f=el.focus;el.focus=function(o){f.call(el,Object.assign({preventScroll:true},o||{}));};});})();</script>';
 		if ( '' === self::$s['footer'] ) {
 			return;
 		}
