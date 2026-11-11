@@ -1,5 +1,10 @@
 # Änderungen
 
+## 0.1.1 (Vorabversion)
+
+- Aufgeräumt: zwei übrig gebliebene Hilfsdateien vom Netzlaufwerk aus dem Projekt entfernt
+- Keine Änderung an Funktionen oder Aussehen
+
 ## 0.1.0 (Vorabversion)
 
 - Erste Version
