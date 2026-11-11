@@ -16,6 +16,12 @@ function wp_kses( $s, $a ) { return strip_tags( (string) $s, '<a><strong><em><br
 function absint( $n ) { return abs( (int) $n ); }
 function wp_attachment_is_image( $id ) { return 7 === (int) $id; }
 function apply_filters( $t, $v ) { return $v; }
+// Logo-Seitenverhältnis: 11 = PNG mit Maßen, 12 = SVG mit viewBox, 13 = SVG ohne alles
+function wp_get_attachment_metadata( $id ) { return 11 === $id ? array( 'width' => 600, 'height' => 150 ) : array(); }
+function get_attached_file( $id ) { return $GLOBALS['mgd_test_files'][ $id ] ?? false; }
+$GLOBALS['mgd_test_files'] = array( 12 => tempnam( sys_get_temp_dir(), 'mgd' ) . '.svg', 13 => tempnam( sys_get_temp_dir(), 'mgd' ) . '.svg' );
+file_put_contents( $GLOBALS['mgd_test_files'][12], '<?xml version="1.0"?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1175.52 155.09"></svg>' );
+file_put_contents( $GLOBALS['mgd_test_files'][13], '<svg xmlns="http://www.w3.org/2000/svg"></svg>' );
 
 require __DIR__ . '/../mgd-wordpress-login/includes/class-mgd-login-settings.php';
 require __DIR__ . '/../mgd-wordpress-login/includes/class-mgd-login-templates.php';
@@ -49,5 +55,10 @@ check( 'Animation bleibt an', 1 === $s['animation'] && 0 === $s['hide_back'] );
 check( 'Kontrast: heller Akzent bekommt dunklen Text', '#10141a' === MGD_Login_Frontend::contrast( '#ffd166' ) );
 check( 'Kontrast: dunkler Akzent bekommt weißen Text', '#ffffff' === MGD_Login_Frontend::contrast( '#1f5d50' ) );
 check( 'Pro-Template ohne Freischaltung nicht nutzbar', 'aurora' === MGD_Login_Templates::usable( 'aurora' ) );
+check( 'Logo ohne Bild: Standard-Verhältnis 3', 3.0 === MGD_Login_Frontend::logo_ratio( 0 ) );
+check( 'Logo PNG: Verhältnis aus Bildmaßen', 4.0 === MGD_Login_Frontend::logo_ratio( 11 ) );
+check( 'Logo SVG: Verhältnis aus viewBox', abs( MGD_Login_Frontend::logo_ratio( 12 ) - 7.5796 ) < 0.001 );
+check( 'Logo SVG ohne Maße: Standard-Verhältnis', 3.0 === MGD_Login_Frontend::logo_ratio( 13 ) );
+array_map( 'unlink', $GLOBALS['mgd_test_files'] );
 
 exit( $fails ? 1 : 0 );

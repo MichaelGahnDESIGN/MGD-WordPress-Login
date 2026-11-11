@@ -79,6 +79,29 @@ final class MGD_Login_Admin {
 		echo '<button type="button" class="button" data-pick>' . esc_html( $button ) . '</button> <button type="button" class="button-link" data-clear' . ( $id ? '' : ' hidden' ) . '>Entfernen</button></div>';
 	}
 
+	// andere Login-Designer aktiv > Designs mischen sich
+	private function conflicts(): void {
+		$known = array(
+			'login-designer/login-designer.php'                         => 'Login Designer',
+			'loginpress/loginpress.php'                                 => 'LoginPress',
+			'custom-login/custom-login.php'                             => 'Custom Login',
+			'login-customizer/login-customizer.php'                     => 'Custom Login Page Customizer',
+			'colorlib-login-customizer/colorlib-login-customizer.php'   => 'Colorlib Login Customizer',
+			'admin-custom-login/admin-custom-login.php'                 => 'Admin Custom Login',
+			'erident-custom-login-and-dashboard/er-custom-login.php'    => 'Erident Custom Login',
+		);
+		$active = array();
+		foreach ( $known as $file => $name ) {
+			if ( is_plugin_active( $file ) ) {
+				$active[] = $name;
+			}
+		}
+		if ( ! $active ) {
+			return;
+		}
+		echo '<div class="notice notice-warning"><p><strong>' . esc_html( implode( ', ', $active ) ) . '</strong> ist auch aktiv und gestaltet ebenfalls die Login-Seite. Dann mischen sich beide Designs, zum Beispiel beim Logo. Bitte das andere Plugin unter <a href="' . esc_url( admin_url( 'plugins.php' ) ) . '">Plugins</a> deaktivieren.</p></div>';
+	}
+
 	public function page(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_die( 'Nicht berechtigt.', '', array( 'response' => 403 ) );
@@ -102,6 +125,7 @@ final class MGD_Login_Admin {
 			</header>
 			<hr class="wp-header-end">
 			<?php settings_errors(); ?>
+			<?php $this->conflicts(); ?>
 
 			<form id="mgd-la-form" method="post" action="options.php">
 				<?php settings_fields( 'mgd_login' ); ?>

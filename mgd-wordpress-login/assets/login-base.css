@@ -5,18 +5,23 @@ body.login.mgd-login {
 	--mgd-field: color-mix(in srgb, var(--mgd-text) 7%, transparent);
 	--mgd-line: color-mix(in srgb, var(--mgd-text) 20%, transparent);
 	min-height: 100vh;
+	min-height: 100dvh;
 	min-width: 0;
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	padding: 28px 16px;
+	justify-content: safe center;
+	padding: clamp(24px, 6vh, 64px) 16px clamp(20px, 4vh, 40px);
 	background: var(--mgd-bg1);
 	color: var(--mgd-text);
 	font-family: var(--mgd-font);
 	position: relative;
 }
+
+/* WP Core setzt html,body height 100% > Inhalt rutscht oben raus, darum auto */
+html:has(body.login.mgd-login), html body.login.mgd-login { height: auto; }
 
 /* Hintergrund Ebene */
 .mgd-login-bg {
@@ -64,19 +69,57 @@ body.mgd-login #login > #nav, body.mgd-login #login > #backtoblog { animation-de
 }
 
 /* Logo oder Seitenname */
-body.mgd-login #login h1 { margin: 0; text-align: center; }
+body.mgd-login #login h1 { display: flex; justify-content: center; margin: 0; text-align: center; }
 body.mgd-login.mgd-logo-image #login h1 a,
 body.mgd-login.mgd-logo-name #login h1 a {
+	position: relative;
 	display: block;
+	flex: none;
 	width: 100%;
 	height: var(--mgd-logo-h);
-	margin: 0 auto 6px;
+	margin: 0 0 10px !important;
 	overflow: hidden;
 	outline-offset: 4px;
 }
+/* Breite aus Höhe x Seitenverhältnis, darf breiter als die Karte sein */
 body.mgd-login.mgd-logo-image #login h1 a {
+	width: calc(var(--mgd-logo-h) * var(--mgd-logo-ratio, 3));
+	max-width: min(calc(100vw - 32px), 480px);
+	height: auto;
+	max-height: var(--mgd-logo-h);
+	aspect-ratio: var(--mgd-logo-ratio, 3);
 	background: var(--mgd-logo) center / contain no-repeat;
 	text-indent: -9999px;
+}
+/* Glanz läuft nur über die Logo-Form (Maske = Logo selbst) */
+body.mgd-login.mgd-logo-image #login h1 a::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(105deg, transparent 38%, rgba(255, 255, 255, .55) 50%, transparent 62%) 150% 0 / 250% 100% no-repeat;
+	-webkit-mask: var(--mgd-logo) center / contain no-repeat;
+	mask: var(--mgd-logo) center / contain no-repeat;
+	opacity: 0;
+	pointer-events: none;
+}
+
+/* Dezente Logo Animation: schweben + ab und zu Glanz */
+body.mgd-login:not(.mgd-no-anim).mgd-logo-image #login h1 a,
+body.mgd-login:not(.mgd-no-anim).mgd-logo-name #login h1 a {
+	animation: mgd-float calc(7s / var(--mgd-speed, 1)) ease-in-out 1s infinite;
+}
+body.mgd-login:not(.mgd-no-anim).mgd-logo-image #login h1 a::after {
+	animation: mgd-shine calc(9s / var(--mgd-speed, 1)) ease-in-out 1.2s infinite;
+}
+@keyframes mgd-float {
+	0%, 100% { transform: translateY(0); }
+	50% { transform: translateY(-4px); }
+}
+@keyframes mgd-shine {
+	0% { opacity: 0; background-position: 150% 0; }
+	4% { opacity: 1; }
+	18% { opacity: 1; background-position: -50% 0; }
+	22%, 100% { opacity: 0; background-position: -50% 0; }
 }
 body.mgd-login.mgd-logo-name #login h1 a {
 	height: auto;

@@ -1,5 +1,14 @@
 # Änderungen
 
+## Noch nicht veröffentlicht
+
+- Logo: „Logo-Höhe“ wirkt jetzt auch bei breiten Logos. Das Logo darf dafür breiter als die Karte sein (höchstens 480 Pixel, auf dem Handy so breit wie der Bildschirm)
+- Logo: SVG-Logos (Vektorgrafiken) werden richtig eingepasst
+- Logo-Auswahl im Backend: Graues Karo-Muster statt weißem, damit auch weiße Logos sichtbar sind
+- Neu: dezente Logo-Animation (leichtes Schweben und ab und zu ein Glanz). Aus, wenn Animationen aus sind oder im Gerät „Bewegung reduzieren“ an ist
+- Abstand oben: Die Login-Box rutscht nicht mehr über den oberen Rand
+- Hinweis im Backend, wenn ein anderes Login-Design-Plugin aktiv ist (zum Beispiel Login Designer)
+
 ## 0.1.3 (Vorabversion)
 
 - Repariert: Die Dateien in der ZIP-Datei haben jetzt die richtigen Leserechte. Vorher konnte der Webserver nach dem Entpacken von Hand (zum Beispiel per SSH) die Design-Dateien nicht ausliefern

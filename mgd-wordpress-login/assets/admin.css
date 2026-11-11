@@ -45,8 +45,10 @@
 @media (prefers-reduced-motion: reduce) { .mgd-la-tpl__thumb { animation: none; } .mgd-la-tpl { transition: none; } }
 
 /* Medien */
-.mgd-la-media__box { display: grid; place-items: center; width: 100%; max-width: 220px; height: 110px; margin-bottom: 8px; overflow: hidden; color: #646970; background: repeating-conic-gradient(#f0f0f1 0 25%, #fff 0 50%) 0 0 / 16px 16px; border: 1px dashed #b5bcc2; border-radius: 8px; }
-.mgd-la-media__box img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.mgd-la-media__box { display: grid; place-items: center; width: 100%; max-width: 220px; height: 110px; margin-bottom: 8px; overflow: hidden; color: #646970; background: repeating-conic-gradient(#8c8f94 0 25%, #a7aaad 0 50%) 0 0 / 16px 16px; border: 1px dashed #b5bcc2; border-radius: 8px; }
+/* SVG ohne Maße hat sonst 0px Breite, graues Karo damit weiße + dunkle Logos sichtbar sind */
+.mgd-la-media__box img { width: 100%; height: 100%; padding: 10px; box-sizing: border-box; object-fit: contain; }
+.mgd-la-media__box span { color: #fff; font-weight: 600; text-shadow: 0 1px 2px rgba(0, 0, 0, .4); }
 
 /* Vorschau */
 .mgd-la-side { position: sticky; top: 42px; padding: 14px; background: #fff; border: 1px solid #dcdcde; border-radius: 12px; }

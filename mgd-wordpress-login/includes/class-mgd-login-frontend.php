@@ -103,6 +103,7 @@ final class MGD_Login_Frontend {
 			'--mgd-overlay'    => (int) $v['overlay'] . '%',
 			'--mgd-speed'      => (string) round( (int) $s['speed'] / 100, 2 ),
 			'--mgd-logo-h'     => (int) $s['logo_height'] . 'px',
+			'--mgd-logo-ratio' => (string) self::logo_ratio( (int) $s['logo_id'] ),
 			'--mgd-font'       => $font,
 			'--mgd-logo'       => $logo ? $url( $logo ) : 'none',
 			'--mgd-bg-image'   => $bg ? $url( $bg ) : 'none',
@@ -112,6 +113,35 @@ final class MGD_Login_Frontend {
 			$out .= $name . ':' . $value . ';';
 		}
 		return 'html body.login.mgd-login{' . $out . '}';
+	}
+
+	/** Seitenverhältnis vom Logo, damit "Logo-Höhe" auch bei breiten Logos greift */
+	public static function logo_ratio( int $id ): float {
+		$fallback = 3.0;
+		if ( ! $id ) {
+			return $fallback;
+		}
+		$meta = wp_get_attachment_metadata( $id );
+		if ( is_array( $meta ) && ! empty( $meta['width'] ) && ! empty( $meta['height'] ) ) {
+			return self::clamp_ratio( (float) $meta['width'] / (float) $meta['height'] );
+		}
+		// SVG hat meist keine Maße in WP > viewBox aus der Datei lesen
+		$file = get_attached_file( $id );
+		if ( ! is_string( $file ) || ! str_ends_with( strtolower( $file ), '.svg' ) || ! is_readable( $file ) ) {
+			return $fallback;
+		}
+		$head = (string) file_get_contents( $file, false, null, 0, 8192 );
+		if ( preg_match( '/viewBox\s*=\s*["\']\s*[-\d.]+[\s,]+[-\d.]+[\s,]+([\d.]+)[\s,]+([\d.]+)/i', $head, $m ) && (float) $m[2] > 0 ) {
+			return self::clamp_ratio( (float) $m[1] / (float) $m[2] );
+		}
+		if ( preg_match( '/<svg[^>]*\swidth\s*=\s*["\']([\d.]+)[^>]*\sheight\s*=\s*["\']([\d.]+)/i', $head, $m ) && (float) $m[2] > 0 ) {
+			return self::clamp_ratio( (float) $m[1] / (float) $m[2] );
+		}
+		return $fallback;
+	}
+
+	private static function clamp_ratio( float $r ): float {
+		return round( max( 0.2, min( 12.0, $r ) ), 4 );
 	}
 
 	/** Schwarz oder Weiß, je nachdem was auf der Farbe besser lesbar ist */
