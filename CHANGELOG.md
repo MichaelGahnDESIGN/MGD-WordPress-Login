@@ -1,6 +1,6 @@
 # Änderungen
 
-## Noch nicht veröffentlicht
+## 0.1.5 (Vorabversion)
 
 - Abstand oben: Auf kleineren Bildschirmen ist die Seite beim Öffnen nach unten gesprungen (WordPress setzt den Cursor ins Namensfeld). Jetzt bleibt die Seite oben und das Logo ist sichtbar. Der Cursor steht trotzdem im Feld
 
