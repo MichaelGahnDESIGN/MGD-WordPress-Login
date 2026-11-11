@@ -1,5 +1,11 @@
 # Änderungen
 
+## 0.1.3 (Vorabversion)
+
+- Repariert: Die Dateien in der ZIP-Datei haben jetzt die richtigen Leserechte. Vorher konnte der Webserver nach dem Entpacken von Hand (zum Beispiel per SSH) die Design-Dateien nicht ausliefern
+- Installation über „Plugin hochladen“ in WordPress war nicht betroffen
+- Keine Änderung an Funktionen oder Aussehen
+
 ## 0.1.2 (Vorabversion)
 
 - Neuer Update-Weg wie bei den anderen MGD Plugins: Die neue Version und ihr Fingerabdruck (SHA-256) kommen von theme.michael-gahn.de, die ZIP-Datei aus dem GitHub-Release

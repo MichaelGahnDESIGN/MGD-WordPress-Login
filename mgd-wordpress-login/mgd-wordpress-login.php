@@ -3,7 +3,7 @@
  * Plugin Name: MGD WordPress Login
  * Plugin URI: https://github.com/MichaelGahnDESIGN/MGD-WordPress-Login
  * Description: Ein richtig schöner Login mit Templates, Animationen und eigenen Farben, Logo und Hintergrund. Ohne externe Dienste.
- * Version: 0.1.2
+ * Version: 0.1.3
  * Requires at least: 6.5
  * Requires PHP: 8.1
  * Author: Michael Gahn DESIGN
@@ -16,7 +16,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'MGD_LOGIN_VERSION', '0.1.2' );
+define( 'MGD_LOGIN_VERSION', '0.1.3' );
 define( 'MGD_LOGIN_FILE', __FILE__ );
 define( 'MGD_LOGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'MGD_LOGIN_URL', plugin_dir_url( __FILE__ ) );
@@ -44,7 +44,7 @@ require_once __DIR__ . '/includes/class-mgd-plugin-admin-tools.php';
     'slug' => 'mgd-wordpress-login',
     'name' => 'MGD WordPress Login',
     'description' => 'Ein richtig schöner Login mit Templates, Animationen und eigenen Farben, Logo und Hintergrund.',
-    'version' => '0.1.2',
+    'version' => '0.1.3',
     'settings' => 'admin.php?page=mgd-login-settings',
     'requires' => '6.5',
     'php' => '8.1',
