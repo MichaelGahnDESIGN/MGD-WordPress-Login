@@ -2,7 +2,7 @@
 
 Ein richtig schöner Login für WordPress. Du wählst ein Template, passt Farben, Logo und Hintergrund an und siehst das Ergebnis sofort live. Ohne externe Dienste, ohne Schriften-Download, ohne Tracking.
 
-> Stand: Version 0.1.5 (Vorabversion). Getestet mit WordPress 6.x und PHP 8.5.
+> Stand: Version 1.4.0. Getestet mit WordPress 6.x und PHP 8.5.
 
 ## Was kann das Plugin?
 
@@ -29,7 +29,7 @@ Ein richtig schöner Login für WordPress. Du wählst ein Template, passt Farben
 
 ## Installation (Schritt für Schritt)
 
-1. ZIP-Datei `mgd-wordpress-login-0.1.5.zip` aus den [Releases](https://github.com/MichaelGahnDESIGN/MGD-WordPress-Login/releases) laden.
+1. ZIP-Datei `mgd-wordpress-login-1.4.0.zip` aus den [Releases](https://github.com/MichaelGahnDESIGN/MGD-WordPress-Login/releases) laden.
 2. In WordPress: **Plugins → Installieren → Plugin hochladen**.
 3. ZIP auswählen, **Installieren**, dann **Aktivieren**.
 4. Links im Menü erscheint **MGD Login**. Dort geht es los.

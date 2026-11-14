@@ -1,5 +1,10 @@
 # Änderungen
 
+## 1.4.0
+
+- Versionsnummer an die anderen MGD Themes und Plugins angeglichen (fertige Version, keine Vorabversion)
+- Keine Änderung an Funktionen oder Aussehen
+
 ## 0.1.5 (Vorabversion)
 
 - Abstand oben: Auf kleineren Bildschirmen ist die Seite beim Öffnen nach unten gesprungen (WordPress setzt den Cursor ins Namensfeld). Jetzt bleibt die Seite oben und das Logo ist sichtbar. Der Cursor steht trotzdem im Feld
