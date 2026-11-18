@@ -3,7 +3,7 @@
  * Plugin Name: MGD WordPress Login
  * Plugin URI: https://github.com/MichaelGahnDESIGN/MGD-WordPress-Login
  * Description: Ein richtig schöner Login mit Templates, Animationen und eigenen Farben, Logo und Hintergrund. Ohne externe Dienste.
- * Version: 1.4.0
+ * Version: 1.5.0
  * Requires at least: 6.5
  * Requires PHP: 8.1
  * Author: Michael Gahn DESIGN
@@ -16,7 +16,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'MGD_LOGIN_VERSION', '1.4.0' );
+define( 'MGD_LOGIN_VERSION', '1.5.0' );
 define( 'MGD_LOGIN_FILE', __FILE__ );
 define( 'MGD_LOGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'MGD_LOGIN_URL', plugin_dir_url( __FILE__ ) );
@@ -36,6 +36,18 @@ MGD_Login_Plugin::boot();
 // Updates nur über theme.michael-gahn.de mit SHA-256 Prüfung, auch im Cron
 MGD_Login_Updater::register( __FILE__ );
 
+// Free-Lizenz Meldung > Install-Client aus MichaThemeV5-Pro (bin/build-install-client.php), nicht von Hand ändern
+foreach ( array( 'Store', 'Transport', 'Response', 'CallbackStore', 'CurlTransport', 'InstallClient', 'Factory', 'Settings', 'Platform/WordPress' ) as $mgd_login_ic ) {
+	require_once MGD_LOGIN_DIR . 'includes/install-client/' . $mgd_login_ic . '.php';
+}
+unset( $mgd_login_ic );
+try {
+	\Mgd\WordPressLogin\Install\Platform\WordPress::boot( __FILE__, 'mgd-wordpress-login', 'wordpress', MGD_LOGIN_VERSION, admin_url( 'admin.php?page=mgd-login-settings#mgd-login-install' ) );
+} catch ( \Throwable $e ) {
+	// Plugin läuft auch ohne Meldung weiter
+	unset( $e );
+}
+
 // Plugin-Links + Details wie bei den anderen MGD Plugins, ohne 'package' > keine GitHub-Updates mehr
 require_once __DIR__ . '/includes/class-mgd-plugin-admin-tools.php';
 \MGD_Plugin_Admin_Tools_20261023::register([
@@ -44,7 +56,7 @@ require_once __DIR__ . '/includes/class-mgd-plugin-admin-tools.php';
     'slug' => 'mgd-wordpress-login',
     'name' => 'MGD WordPress Login',
     'description' => 'Ein richtig schöner Login mit Templates, Animationen und eigenen Farben, Logo und Hintergrund.',
-    'version' => '1.4.0',
+    'version' => '1.5.0',
     'settings' => 'admin.php?page=mgd-login-settings',
     'requires' => '6.5',
     'php' => '8.1',

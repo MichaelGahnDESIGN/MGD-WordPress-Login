@@ -257,6 +257,12 @@ final class MGD_Login_Admin {
 					</aside>
 				</div>
 			</form>
+
+			<?php // Free-Lizenz Schalter, eigenes Formular (nicht im options.php Form verschachteln) ?>
+			<section class="mgd-la-box mgd-la-install" id="mgd-login-install">
+				<h2>Installation melden</h2>
+				<?php echo \Mgd\WordPressLogin\Install\Platform\WordPress::settingsHtml( 'mgd-wordpress-login', 'wordpress', MGD_LOGIN_VERSION ); // phpcs:ignore WordPress.Security.EscapeOutput -- Client escaped selbst ?>
+			</section>
 		</div>
 		<?php
 	}

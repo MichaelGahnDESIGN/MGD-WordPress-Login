@@ -58,3 +58,7 @@
 .mgd-la-frame { margin: 0 auto; max-width: 100%; height: min(72vh, 760px); overflow: hidden; background: #111; border: 1px solid #c3c4c7; border-radius: 10px; transition: max-width .25s; }
 .mgd-la-frame iframe { display: block; width: 100%; height: 100%; border: 0; }
 .mgd-la-save { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin: 6px 0 30px; }
+/* Free-Lizenz Schalter unter dem Formular */
+.mgd-la-install { max-width: 760px; margin-top: 24px; }
+.mgd-la-install label { font-weight: 600; }
+.mgd-la-install .description { max-width: 62ch; }

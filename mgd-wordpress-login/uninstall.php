@@ -5,4 +5,6 @@ defined( 'WP_UNINSTALL_PLUGIN' ) || exit;
 $mgd_login_settings = get_option( 'mgd_login_settings' );
 if ( is_array( $mgd_login_settings ) && ! empty( $mgd_login_settings['delete_data'] ) ) {
 	delete_option( 'mgd_login_settings' );
+	// Free-Lizenz Status (ID + Schlüssel) gleich mit weg
+	delete_option( 'mgd_install_mgd_wordpress_login' );
 }

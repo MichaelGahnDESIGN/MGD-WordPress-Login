@@ -1,5 +1,13 @@
 # Änderungen
 
+## 1.5.0
+
+- Neu: Das Plugin meldet sich höchstens einmal am Tag bei theme.michael-gahn.de. Gesendet werden nur Plugin-Name, Version, Shopsystem, Domain und eine zufällige Installations-ID
+- Der Schalter ist ab Werk an und jederzeit abschaltbar unter **MGD Login → Installation melden**. Beim Abschalten wird der Eintrag auf theme.michael-gahn.de gelöscht
+- Das Plugin funktioniert immer voll weiter, auch ohne die Plattform oder mit ausgeschaltetem Schalter
+- Neue Datei `readme.txt` mit Kurzbeschreibung
+- Neue Tests (`php tests/install.php`)
+
 ## 1.4.0
 
 - Versionsnummer an die anderen MGD Themes und Plugins angeglichen (fertige Version, keine Vorabversion)
