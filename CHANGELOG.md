@@ -1,5 +1,12 @@
 # Änderungen
 
+## 1.7.1
+
+- Neue Ansicht **Weitere Plugins** auf der Seite **MGD Login → Info und Updates**: große Karten mit Bildern, Kategorien, Suche, Filter und ein Fenster mit Details
+- Mit dem Knopf „Installieren“ kannst Du ein anderes MGD-Plugin direkt installieren. Es wird dabei nicht eingeschaltet
+- Die alte Seite „Weitere Plugins“ ist jetzt ganz entfernt (Dateien gelöscht)
+- Keine Änderung an der Login-Seite. Deine Einstellungen bleiben erhalten
+
 ## 1.7.0
 
 - Umstellung auf den gemeinsamen MGD-Baukasten: Updates von theme.michael-gahn.de mit Prüfsumme, Anmeldung der Installation, Liste „Weitere Plugins“
