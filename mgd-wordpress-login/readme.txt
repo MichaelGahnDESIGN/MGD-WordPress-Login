@@ -3,7 +3,7 @@ Contributors: michaelgahndesign
 Tags: login, login page, custom login, design
 Requires at least: 6.5
 Requires PHP: 8.1
-Stable tag: 1.5.0
+Stable tag: 1.6.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,7 +13,8 @@ Ein richtig schöner Login mit Templates, Animationen und eigenen Farben, Logo u
 
 Du wählst ein Template, passt Farben, Logo und Hintergrund an und siehst das Ergebnis sofort live.
 
-* 7 kostenlose Templates mit Animation
+* 8 kostenlose Layouts, jedes mit eigenen Effekten
+* Effekte frei wählbar: Partikel, Lichtkegel, Karten-Effekte, Position
 * Eigene Farben, eigenes Logo, eigenes Hintergrundbild
 * Live-Vorschau im Backend (Desktop, Tablet, Handy)
 * Keine externen Schriften, keine CDN-Skripte, keine fremden Tracker
@@ -30,6 +31,10 @@ Updates kommen über theme.michael-gahn.de und GitHub. Vor dem Einspielen wird d
 4. Links im Menü erscheint „MGD Login“.
 
 == Changelog ==
+
+= 1.6.0 =
+* 8 überarbeitete Layouts, neu: Kosmos
+* Effekte frei wählbar: Partikel, Lichtkegel, Karten-Effekte, Position der Karte
 
 = 1.5.0 =
 * Neu: Das Plugin meldet sich höchstens einmal am Tag bei theme.michael-gahn.de. Abschaltbar unter MGD Login → Installation melden.

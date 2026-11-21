@@ -1,6 +1,6 @@
 # Änderungen
 
-## Noch nicht veröffentlicht
+## 1.6.0
 
 - 8 Layouts, alle überarbeitet und deutlich unterschiedlicher: Nordlicht (neu gestaltet), Milchglas, Neon Grid, Minimal Clean, Split Screen, Partikel-Netz, Sunset und neu **Kosmos**
 - Neue Effekte, frei wählbar: Partikel (Sterne, Schnee, Glühwürmchen, Seifenblasen, Punktenetz, Sternenflug, Konfetti), Menge der Partikel, Lichtkegel folgt der Maus, Karten-Effekt (3D-Neigung, kreisender Leuchtrand, Glanz-Streifen), Position der Karte (Mitte, links, rechts)
