@@ -6,7 +6,8 @@ Ein richtig schöner Login für WordPress. Du wählst ein Template, passt Farben
 
 ## Was kann das Plugin?
 
-- 7 kostenlose Templates mit Animation
+- 8 kostenlose Layouts, jedes sieht anders aus und hat eigene Effekte
+- Effekte frei wählbar: Partikel, Lichtkegel, Effekt auf der Karte, Position der Karte
 - Eigene Farben, eigenes Logo, eigenes Hintergrundbild
 - Live-Vorschau im Backend (Desktop, Tablet, Handy)
 - Eigene Texte (Überschrift, Text darunter, Fußzeile)
@@ -15,17 +16,30 @@ Ein richtig schöner Login für WordPress. Du wählst ein Template, passt Farben
 - Kontrast-Warnung, wenn Text schwer lesbar wäre
 - Später: kostenpflichtige Pro-Templates von [theme.michael-gahn.de](https://theme.michael-gahn.de)
 
-## Die kostenlosen Templates
+## Die 8 Layouts
 
-| Template | Stil |
-|---|---|
-| Aurora | dunkel, leuchtende Farbwolken, Milchglas-Karte |
-| Milchglas | hell, bunte Kugeln hinter Glasscheibe |
-| Neon Grid | dunkel, laufendes Raster, pulsierende Neon-Karte |
-| Minimal Clean | hell, ruhig, weiches Licht |
-| Split Screen | links Marke mit Bewegung, rechts Formular |
-| Partikel-Netz | dunkel, Punktenetz reagiert auf die Maus |
-| Sunset | warmer Farbverlauf mit atmender Sonne |
+| Layout | So sieht es aus | Effekte ab Werk |
+|---|---|---|
+| Nordlicht | dunkel, tanzende Polarlicht-Bänder über Bergen | Sterne, Glanz auf der Karte |
+| Milchglas | hell, glänzende 3D-Kugeln hinter Glas | Seifenblasen, Karte neigt sich zur Maus |
+| Neon Grid | Synthwave-Sonne über laufendem Raster | kreisender Leuchtrand um die Karte |
+| Minimal Clean | ruhig, Punktraster, Karte links, großer Titel rechts | Lichtkegel folgt der Maus |
+| Split Screen | links Markenfläche mit fließendem Verlauf, rechts Formular | Glühwürmchen |
+| Partikel-Netz | dunkel, Punktenetz reagiert auf die Maus | Netz, Lichtkegel, Karte in 3D |
+| Sunset | Abendhimmel, Sonne über Hügeln | Glühwürmchen, Glanz auf der Karte |
+| Kosmos | Weltall mit Planet, Formular im Glas-Panel rechts | Sternenflug |
+
+## Effekte selbst wählen
+
+Unter **MGD Login → 6 Animation und Effekte**:
+
+1. **Partikel:** Keine, Sterne, Schnee, Glühwürmchen, Seifenblasen, Punktenetz, Sternenflug oder Konfetti.
+2. **Menge der Partikel:** 10 bis 200 Prozent. Weniger ist ruhiger und schont ältere Geräte.
+3. **Lichtkegel folgt der Maus:** an oder aus.
+4. **Effekt auf der Karte:** keiner, 3D-Neigung zur Maus, kreisender Leuchtrand oder Glanz-Streifen.
+5. **Position der Karte:** Mitte, links oder rechts (nur auf großen Bildschirmen).
+
+„Wie das Layout“ heißt: so, wie das Layout es vorsieht.
 
 ## Installation (Schritt für Schritt)
 

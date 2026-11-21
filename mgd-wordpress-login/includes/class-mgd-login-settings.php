@@ -41,6 +41,11 @@ final class MGD_Login_Settings {
 			'hide_back'    => 0,
 			'animation'    => 1,
 			'speed'        => 100,
+			'particles'    => '',
+			'particle_amount' => 100,
+			'light'        => '',
+			'card_fx'      => '',
+			'position'     => '',
 			'custom_css'   => '',
 			'delete_data'  => 0,
 		);
@@ -115,6 +120,14 @@ final class MGD_Login_Settings {
 
 		$speed        = self::num( $raw, 'speed', 25, 300 );
 		$out['speed'] = '' === $speed ? 100 : $speed;
+
+		// Effekte, leer = wie das Layout
+		foreach ( MGD_Login_Templates::fx_choices() as $key => $choices ) {
+			$val         = (string) ( $raw[ $key ] ?? '' );
+			$out[ $key ] = isset( $choices[ $val ] ) ? $val : '';
+		}
+		$amount                 = self::num( $raw, 'particle_amount', 10, 200 );
+		$out['particle_amount'] = '' === $amount ? 100 : $amount;
 
 		$out['custom_css'] = self::clean_css( (string) ( $raw['custom_css'] ?? '' ) );
 		return $out;

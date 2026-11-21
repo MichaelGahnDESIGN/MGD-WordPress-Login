@@ -66,6 +66,9 @@
 			$(this).val('').closest('.wp-picker-container').find('.wp-color-result').css('background-color', '');
 		});
 		$.each(['radius', 'card_opacity', 'blur', 'card_width', 'overlay'], function (i, k) { $('#mgd-' + k).val(''); });
+		// Effekte zurück auf "Wie das Layout"
+		$.each(['particles', 'light', 'card_fx', 'position'], function (i, k) { $('#mgd-' + k).val(''); });
+		$('#mgd-particle_amount').val('100');
 		later();
 	});
 

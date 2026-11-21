@@ -1,11 +1,15 @@
-/* Sunset - fließender Verlauf + atmende Sonne */
-.mgd-t-sunset .mgd-login-bg { background: linear-gradient(160deg, var(--mgd-bg1), var(--mgd-bg2), var(--mgd-accent), var(--mgd-bg2)); background-size: 300% 300%; animation: mgd-su-flow calc(26s / var(--mgd-speed)) ease-in-out infinite; }
-@keyframes mgd-su-flow { 0%, 100% { background-position: 0% 30%; } 50% { background-position: 100% 70%; } }
-.mgd-t-sunset .mgd-login-bg > span:nth-child(1) { left: 50%; bottom: -46vmin; width: 62vmin; height: 62vmin; margin-left: -31vmin; border-radius: 50%; background: radial-gradient(circle at 50% 40%, #fff3c4, var(--mgd-accent) 62%, transparent 72%); filter: blur(2px); animation: mgd-su-sun calc(9s / var(--mgd-speed)) ease-in-out infinite alternate; }
-.mgd-t-sunset .mgd-login-bg > span:nth-child(2), .mgd-t-sunset .mgd-login-bg > span:nth-child(3) { height: 10vmin; border-radius: 999px; background: rgba(255, 255, 255, .16); filter: blur(14px); }
-.mgd-t-sunset .mgd-login-bg > span:nth-child(2) { width: 46vmin; left: 6%; top: 18%; animation: mgd-su-cloud calc(30s / var(--mgd-speed)) ease-in-out infinite alternate; }
-.mgd-t-sunset .mgd-login-bg > span:nth-child(3) { width: 34vmin; right: 8%; top: 34%; animation: mgd-su-cloud calc(38s / var(--mgd-speed)) ease-in-out infinite alternate-reverse; }
-@keyframes mgd-su-sun { to { transform: translateY(-4vmin) scale(1.08); filter: blur(5px); } }
+/* Sunset - fließender Himmel, Sonne, Hügel. Glühwürmchen aus effects.js */
+.mgd-t-sunset .mgd-login-bg { background: linear-gradient(170deg, var(--mgd-bg2), color-mix(in srgb, var(--mgd-bg2) 50%, var(--mgd-bg1)), var(--mgd-bg1), var(--mgd-accent)); background-size: 100% 300%; animation: mgd-su-flow calc(26s / var(--mgd-speed)) ease-in-out infinite alternate; }
+@keyframes mgd-su-flow { from { background-position: 0 0%; } to { background-position: 0 70%; } }
+.mgd-t-sunset .mgd-login-bg > span:nth-child(1) { left: 50%; bottom: 14vh; width: 54vmin; height: 54vmin; margin-left: -27vmin; border-radius: 50%; background: radial-gradient(circle at 50% 42%, #fff6d1, var(--mgd-accent) 58%, color-mix(in srgb, var(--mgd-accent) 60%, #ff5f6d) 70%, transparent 71%); box-shadow: 0 0 120px 40px color-mix(in srgb, var(--mgd-accent) 45%, transparent); animation: mgd-su-sun calc(9s / var(--mgd-speed)) ease-in-out infinite alternate; }
+.mgd-t-sunset .mgd-login-bg > span:nth-child(2), .mgd-t-sunset .mgd-login-bg > span:nth-child(3) { height: 9vmin; border-radius: 999px; background: rgba(255, 255, 255, .18); filter: blur(12px); }
+.mgd-t-sunset .mgd-login-bg > span:nth-child(2) { width: 46vmin; left: 6%; top: 16%; animation: mgd-su-cloud calc(30s / var(--mgd-speed)) ease-in-out infinite alternate; }
+.mgd-t-sunset .mgd-login-bg > span:nth-child(3) { width: 34vmin; right: 8%; top: 30%; animation: mgd-su-cloud calc(38s / var(--mgd-speed)) ease-in-out infinite alternate-reverse; }
+/* Hügel in 2 Ebenen, vor Sonne und Glühwürmchen */
+.mgd-t-sunset .mgd-login-bg > span:nth-child(4), .mgd-t-sunset .mgd-login-bg > span:nth-child(5) { left: -5%; right: -5%; bottom: 0; z-index: 4; }
+.mgd-t-sunset .mgd-login-bg > span:nth-child(4) { height: 30vh; border-radius: 50% 50% 0 0 / 70% 60% 0 0; background: linear-gradient(to bottom, color-mix(in srgb, var(--mgd-bg2) 70%, #000), color-mix(in srgb, var(--mgd-bg2) 40%, #000)); transform: translateX(-12%); }
+.mgd-t-sunset .mgd-login-bg > span:nth-child(5) { height: 20vh; border-radius: 60% 40% 0 0 / 80% 70% 0 0; background: linear-gradient(to bottom, color-mix(in srgb, var(--mgd-bg2) 45%, #000), color-mix(in srgb, var(--mgd-bg2) 25%, #000)); transform: translateX(18%); }
+@keyframes mgd-su-sun { to { transform: translateY(-3vmin) scale(1.05); } }
 @keyframes mgd-su-cloud { to { transform: translateX(14vmin); } }
 body.mgd-t-sunset #login form { border-color: rgba(255, 255, 255, .28); }
 body.mgd-t-sunset #login #nav a, body.mgd-t-sunset #login #backtoblog a { color: #fff; text-shadow: 0 1px 10px rgba(40, 10, 70, .75); }

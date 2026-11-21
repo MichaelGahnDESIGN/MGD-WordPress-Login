@@ -299,3 +299,77 @@ body.mgd-no-anim *, body.mgd-no-anim *::before, body.mgd-no-anim *::after { anim
 @media (max-width: 480px) {
 	body.mgd-login #login form { padding: 24px 18px 22px; }
 }
+
+/* ===== Effekte für alle Layouts ===== */
+
+/* Lichtkegel folgt der Maus (JS setzt --mgd-lx/--mgd-ly) */
+body.mgd-login.mgd-light::after {
+	content: "";
+	position: fixed;
+	inset: 0;
+	z-index: 1;
+	pointer-events: none;
+	background: radial-gradient(38vmax 38vmax at var(--mgd-lx, 50%) var(--mgd-ly, 30%), color-mix(in srgb, var(--mgd-accent) 24%, transparent), transparent 70%);
+}
+
+/* Karten-Position, auf dem Handy immer Mitte. Split hat eigenes Layout */
+@media (min-width: 900px) {
+	body.mgd-login.mgd-pos-left:not(.mgd-t-split) { align-items: flex-start; padding-left: clamp(24px, 9vw, 160px); padding-right: clamp(24px, 9vw, 160px); }
+	body.mgd-login.mgd-pos-right:not(.mgd-t-split) { align-items: flex-end; padding-left: clamp(24px, 9vw, 160px); padding-right: clamp(24px, 9vw, 160px); }
+	body.mgd-pos-left:not(.mgd-t-split) #login,
+	body.mgd-pos-right:not(.mgd-t-split) #login { margin-left: 0; margin-right: 0; }
+	/* Sprachwahl + Fußzeile unter die Karte, nicht in die Mitte */
+	body.mgd-pos-left:not(.mgd-t-split) .language-switcher,
+	body.mgd-pos-right:not(.mgd-t-split) .language-switcher,
+	body.mgd-pos-left:not(.mgd-t-split) .mgd-login-footer,
+	body.mgd-pos-right:not(.mgd-t-split) .mgd-login-footer { width: min(var(--mgd-card-width), 100%); margin-left: 0; margin-right: 0; }
+}
+
+/* Karte: kreisender Leuchtrand */
+@property --mgd-ang { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+body.mgd-card-glow #login form,
+body.mgd-card-shine #login form,
+body.mgd-card-tilt #login form { position: relative; }
+body.mgd-card-glow #login form::before {
+	content: "";
+	position: absolute;
+	inset: -1px;
+	padding: 1.5px;
+	border-radius: inherit;
+	pointer-events: none;
+	background: conic-gradient(from var(--mgd-ang), transparent 0deg 210deg, var(--mgd-accent) 280deg, #fff 318deg, var(--mgd-accent) 338deg, transparent 360deg);
+	-webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+	-webkit-mask-composite: xor;
+	mask-composite: exclude;
+	animation: mgd-ring calc(5s / var(--mgd-speed, 1)) linear infinite;
+}
+body.mgd-card-glow #login form { box-shadow: 0 30px 80px -24px rgba(0, 0, 0, .55), 0 0 42px -8px color-mix(in srgb, var(--mgd-accent) 55%, transparent); }
+@keyframes mgd-ring { to { --mgd-ang: 360deg; } }
+
+/* Karte: Glanz-Streifen läuft ab und zu drüber */
+body.mgd-card-shine #login form::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border-radius: inherit;
+	pointer-events: none;
+	background: linear-gradient(115deg, transparent 40%, rgba(255, 255, 255, .2) 50%, transparent 60%) 150% 0 / 250% 100% no-repeat;
+	animation: mgd-card-shine calc(8s / var(--mgd-speed, 1)) ease-in-out 1.6s infinite;
+}
+@keyframes mgd-card-shine { 0% { background-position: 150% 0; } 28%, 100% { background-position: -60% 0; } }
+
+/* Karte: 3D-Neigung, Glanzpunkt wandert mit (JS setzt --mgd-gx/--mgd-gy) */
+body.mgd-card-tilt #login form.mgd-tilt-on { will-change: transform; transform-style: preserve-3d; }
+body.mgd-card-tilt #login form::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border-radius: inherit;
+	pointer-events: none;
+	background: radial-gradient(60% 50% at var(--mgd-gx, 30%) var(--mgd-gy, 0%), rgba(255, 255, 255, .22), transparent 70%);
+}
+
+/* Großer Markentitel neben der Karte (nur Layouts mit Platz) */
+.mgd-login-hero strong { display: block; overflow-wrap: anywhere; }
+.mgd-login-hero em { display: block; font-style: normal; }
+@media (max-width: 899px) { body.mgd-login .mgd-login-hero { display: none !important; } }

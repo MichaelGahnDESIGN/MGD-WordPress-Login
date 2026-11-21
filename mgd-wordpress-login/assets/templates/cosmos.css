@@ -1,0 +1,29 @@
+/* Kosmos - Sternenflug, Nebel, Planet mit Ring, Formular im Glas-Panel rechts */
+.mgd-t-cosmos .mgd-login-bg { background: radial-gradient(120% 90% at 30% 60%, var(--mgd-bg2), var(--mgd-bg1) 65%); }
+/* Nebel */
+.mgd-t-cosmos .mgd-login-bg > span:nth-child(1), .mgd-t-cosmos .mgd-login-bg > span:nth-child(2) { border-radius: 50%; filter: blur(60px); mix-blend-mode: screen; will-change: transform; }
+.mgd-t-cosmos .mgd-login-bg > span:nth-child(1) { width: 60vmax; height: 40vmax; left: -10vmax; top: -8vmax; background: radial-gradient(closest-side, color-mix(in srgb, var(--mgd-accent) 60%, transparent), transparent); opacity: .55; animation: mgd-co-neb calc(34s / var(--mgd-speed)) ease-in-out infinite alternate; }
+.mgd-t-cosmos .mgd-login-bg > span:nth-child(2) { width: 50vmax; height: 34vmax; left: 20vw; bottom: -10vmax; background: radial-gradient(closest-side, rgba(255, 92, 180, .45), transparent); opacity: .5; animation: mgd-co-neb calc(41s / var(--mgd-speed)) ease-in-out infinite alternate-reverse; }
+/* Planet vor den Sternen */
+.mgd-t-cosmos .mgd-login-bg > span:nth-child(3) { z-index: 4; width: 38vmin; height: 38vmin; left: 14vw; bottom: 12vh; border-radius: 50%; background: radial-gradient(circle at 32% 30%, color-mix(in srgb, var(--mgd-accent) 40%, #fff) 0, var(--mgd-accent) 30%, color-mix(in srgb, var(--mgd-accent) 45%, #000) 70%, #05040e 100%); box-shadow: 0 0 60px 6px color-mix(in srgb, var(--mgd-accent) 40%, transparent), inset -16px -22px 50px rgba(0, 0, 0, .6); animation: mgd-co-planet calc(14s / var(--mgd-speed)) ease-in-out infinite alternate; }
+/* Ring: hinten hinter dem Planeten, vordere Hälfte davor */
+.mgd-t-cosmos .mgd-login-bg > span:nth-child(4), .mgd-t-cosmos .mgd-login-bg > span:nth-child(5) { width: 62vmin; height: 16vmin; left: calc(14vw - 12vmin); bottom: calc(12vh + 11vmin); border-radius: 50%; border: 2px solid color-mix(in srgb, var(--mgd-accent) 55%, #fff); box-shadow: 0 0 18px color-mix(in srgb, var(--mgd-accent) 50%, transparent), inset 0 0 18px color-mix(in srgb, var(--mgd-accent) 30%, transparent); transform: rotate(-16deg); animation: mgd-co-ring calc(14s / var(--mgd-speed)) ease-in-out infinite alternate; }
+.mgd-t-cosmos .mgd-login-bg > span:nth-child(4) { z-index: 3; opacity: .55; }
+.mgd-t-cosmos .mgd-login-bg > span:nth-child(5) { z-index: 5; -webkit-mask: linear-gradient(to bottom, transparent 50%, #000 50%); mask: linear-gradient(to bottom, transparent 50%, #000 50%); }
+@keyframes mgd-co-neb { to { transform: translate(6vmax, 4vmax) scale(1.15); } }
+@keyframes mgd-co-planet { to { transform: translateY(-2.5vmin); } }
+@keyframes mgd-co-ring { to { transform: rotate(-16deg) translateY(-2.5vmin); } }
+/* Glas-Panel über die ganze Höhe, wenn Karte rechts */
+@media (min-width: 900px) {
+	body.mgd-t-cosmos.mgd-pos-right::before { content: ""; position: fixed; top: 0; right: 0; bottom: 0; z-index: 1; width: calc(var(--mgd-card-width) + 2 * clamp(24px, 9vw, 160px)); max-width: 100%; background: color-mix(in srgb, var(--mgd-card) 55%, transparent); border-left: 1px solid var(--mgd-line); -webkit-backdrop-filter: blur(var(--mgd-blur)) saturate(140%); backdrop-filter: blur(var(--mgd-blur)) saturate(140%); box-shadow: -40px 0 80px -40px rgba(0, 0, 0, .6); }
+	body.mgd-t-cosmos.mgd-pos-right #login form { background: transparent; border-color: transparent; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; padding-left: 0; padding-right: 0; }
+	.mgd-t-cosmos.mgd-pos-right .mgd-login-hero { display: block; position: absolute; z-index: 5; left: 8vw; top: 12vh; max-width: 36vw; color: var(--mgd-text); }
+}
+.mgd-t-cosmos .mgd-login-hero strong { font-size: clamp(34px, 4.6vw, 72px); line-height: 1.04; font-weight: 800; letter-spacing: -.03em; text-shadow: 0 0 40px color-mix(in srgb, var(--mgd-accent) 60%, transparent); }
+.mgd-t-cosmos .mgd-login-hero em { margin-top: 14px; font-size: clamp(15px, 1.3vw, 19px); color: var(--mgd-muted); }
+body.mgd-t-cosmos #login .button-primary { box-shadow: 0 0 26px -4px color-mix(in srgb, var(--mgd-accent) 80%, transparent); }
+/* Handy: kein Panel > Karte fester machen, Planet kleiner */
+@media (max-width: 899px) {
+	body.mgd-t-cosmos #login form { background: color-mix(in srgb, var(--mgd-card) 78%, transparent); }
+	.mgd-t-cosmos .mgd-login-bg > span:nth-child(n+3):nth-child(-n+5) { opacity: .6; }
+}

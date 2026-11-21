@@ -67,6 +67,18 @@ final class MGD_Login_Frontend {
 		if ( ! empty( $tpl['js'] ) && ! empty( self::$s['animation'] ) ) {
 			wp_enqueue_script( 'mgd-login-tpl-' . self::$tpl, $tpl['js'], array(), $tpl['ver'], true );
 		}
+		// Partikel, Lichtkegel, 3D-Neigung > ein Script für alles, nur wenn was an ist
+		$fx = MGD_Login_Templates::fx( self::$tpl, self::$s );
+		if ( ! empty( self::$s['animation'] ) && ( 'none' !== $fx['particles'] || 'on' === $fx['light'] || 'tilt' === $fx['card_fx'] ) ) {
+			wp_enqueue_script( 'mgd-login-fx', MGD_LOGIN_URL . 'assets/js/effects.js', array(), MGD_LOGIN_VERSION, true );
+			$conf = array(
+				'particles' => $fx['particles'],
+				'amount'    => round( (int) self::$s['particle_amount'] / 100, 2 ),
+				'light'     => 'on' === $fx['light'],
+				'tilt'      => 'tilt' === $fx['card_fx'],
+			);
+			wp_add_inline_script( 'mgd-login-fx', 'window.MGDLoginFX=' . wp_json_encode( $conf ) . ';', 'before' );
+		}
 		$css = self::variables( $tpl );
 		if ( '' !== self::$s['custom_css'] ) {
 			$css .= "\n" . MGD_Login_Settings::clean_css( self::$s['custom_css'] );
@@ -171,6 +183,13 @@ final class MGD_Login_Frontend {
 			$classes[] = 'mgd-has-bg';
 		}
 		$classes[] = self::$s['logo_id'] ? 'mgd-logo-image' : 'mgd-logo-' . self::$s['logo_mode'];
+		$fx        = MGD_Login_Templates::fx( self::$tpl, self::$s );
+		$classes[] = 'mgd-pos-' . $fx['position'];
+		$classes[] = 'mgd-card-' . $fx['card_fx'];
+		$classes[] = 'mgd-fx-' . $fx['particles'];
+		if ( 'on' === $fx['light'] ) {
+			$classes[] = 'mgd-light';
+		}
 		if ( self::$s['hide_back'] ) {
 			$classes[] = 'mgd-hide-back';
 		}
@@ -204,7 +223,8 @@ final class MGD_Login_Frontend {
 
 	/** Hintergrund-Ebene mit Animationsformen, kommt direkt nach <body> */
 	public static function background(): void {
-		echo '<div class="mgd-login-bg" aria-hidden="true"><span></span><span></span><span></span>';
+		// 6 Ebenen für die Layouts, nicht jedes nutzt alle
+		echo '<div class="mgd-login-bg" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span>';
 		echo '<div class="mgd-login-hero"><strong>' . esc_html( get_bloginfo( 'name' ) ) . '</strong>';
 		if ( '' !== self::$s['subtitle'] ) {
 			echo '<em>' . esc_html( self::$s['subtitle'] ) . '</em>';

@@ -1,9 +1,15 @@
-/* Milchglas - bunte Kugeln hinter heller Scheibe */
-.mgd-t-glass .mgd-login-bg > span { border-radius: 50%; will-change: transform; }
-.mgd-t-glass .mgd-login-bg > span:nth-child(1) { width: 38vmin; height: 38vmin; left: 12%; top: 14%; background: linear-gradient(135deg, var(--mgd-accent), #ff7ad9); animation: mgd-gl-a calc(16s / var(--mgd-speed)) ease-in-out infinite alternate; }
-.mgd-t-glass .mgd-login-bg > span:nth-child(2) { width: 30vmin; height: 30vmin; right: 14%; bottom: 12%; background: linear-gradient(135deg, #34d4c4, var(--mgd-accent)); animation: mgd-gl-b calc(19s / var(--mgd-speed)) ease-in-out infinite alternate; }
-.mgd-t-glass .mgd-login-bg > span:nth-child(3) { width: 18vmin; height: 18vmin; right: 26%; top: 10%; background: linear-gradient(135deg, #ffc46b, #ff7ad9); animation: mgd-gl-c calc(14s / var(--mgd-speed)) ease-in-out infinite alternate; }
-@keyframes mgd-gl-a { to { transform: translate(14vmin, 10vmin) rotate(25deg); } }
-@keyframes mgd-gl-b { to { transform: translate(-12vmin, -14vmin) rotate(-20deg); } }
-@keyframes mgd-gl-c { to { transform: translate(-10vmin, 16vmin) scale(1.3); } }
-body.mgd-t-glass #login form { border-color: rgba(255, 255, 255, .7); box-shadow: 0 30px 70px -26px rgba(40, 50, 120, .5), inset 0 1px 0 rgba(255, 255, 255, .8); }
+/* Milchglas - glänzende 3D Kugeln + Glasring, Blasen aus effects.js */
+.mgd-t-glass .mgd-login-bg { background: linear-gradient(135deg, var(--mgd-bg1), var(--mgd-bg2)); }
+.mgd-t-glass .mgd-login-bg > span:nth-child(-n+4) { border-radius: 50%; will-change: transform; box-shadow: inset -12px -18px 40px rgba(20, 20, 80, .25), 0 40px 60px -30px rgba(40, 40, 120, .45); }
+.mgd-t-glass .mgd-login-bg > span:nth-child(1) { width: 34vmin; height: 34vmin; left: 9%; top: 12%; background: radial-gradient(circle at 32% 28%, #fff, color-mix(in srgb, var(--mgd-accent) 70%, #fff) 22%, var(--mgd-accent) 62%, color-mix(in srgb, var(--mgd-accent) 60%, #000) 100%); animation: mgd-gl-a calc(16s / var(--mgd-speed)) ease-in-out infinite alternate; }
+.mgd-t-glass .mgd-login-bg > span:nth-child(2) { width: 26vmin; height: 26vmin; right: 11%; bottom: 10%; background: radial-gradient(circle at 32% 28%, #fff, #ffb3e6 24%, #ff5fc8 64%, #b0207f 100%); animation: mgd-gl-b calc(19s / var(--mgd-speed)) ease-in-out infinite alternate; }
+.mgd-t-glass .mgd-login-bg > span:nth-child(3) { width: 14vmin; height: 14vmin; right: 24%; top: 9%; background: radial-gradient(circle at 32% 28%, #fff, #ffe39b 26%, #ffb02e 66%, #b56a00 100%); animation: mgd-gl-c calc(13s / var(--mgd-speed)) ease-in-out infinite alternate; }
+.mgd-t-glass .mgd-login-bg > span:nth-child(4) { width: 18vmin; height: 18vmin; left: 18%; bottom: 8%; background: radial-gradient(circle at 32% 28%, #fff, #b2fff2 26%, #2fd4be 66%, #0d7f70 100%); animation: mgd-gl-d calc(17s / var(--mgd-speed)) ease-in-out infinite alternate; }
+/* Glasring */
+.mgd-t-glass .mgd-login-bg > span:nth-child(5) { width: 46vmin; height: 46vmin; left: 50%; top: 50%; margin: -23vmin 0 0 -23vmin; border-radius: 50%; background: conic-gradient(from 0deg, rgba(255, 255, 255, .9), color-mix(in srgb, var(--mgd-accent) 50%, #fff), rgba(255, 255, 255, .2), #ffd1f1, rgba(255, 255, 255, .9)); -webkit-mask: radial-gradient(closest-side, transparent 72%, #000 73%, #000 99%, transparent); mask: radial-gradient(closest-side, transparent 72%, #000 73%, #000 99%, transparent); opacity: .7; animation: mgd-gl-ring calc(30s / var(--mgd-speed)) linear infinite; }
+@keyframes mgd-gl-a { to { transform: translate(10vmin, 8vmin) scale(1.06); } }
+@keyframes mgd-gl-b { to { transform: translate(-12vmin, -10vmin) scale(.94); } }
+@keyframes mgd-gl-c { to { transform: translate(-8vmin, 14vmin); } }
+@keyframes mgd-gl-d { to { transform: translate(9vmin, -12vmin) scale(1.1); } }
+@keyframes mgd-gl-ring { to { transform: rotate(360deg) scale(1.04); } }
+body.mgd-t-glass #login form { border-color: rgba(255, 255, 255, .75); box-shadow: 0 30px 70px -26px rgba(40, 50, 120, .5), inset 0 1px 0 rgba(255, 255, 255, .9); }

@@ -1,9 +1,16 @@
-/* Aurora - weiche Farbwolken */
-.mgd-t-aurora .mgd-login-bg { background: radial-gradient(120% 90% at 50% 0%, var(--mgd-bg2), var(--mgd-bg1) 70%); }
-.mgd-t-aurora .mgd-login-bg > span { border-radius: 50%; filter: blur(70px); opacity: .62; mix-blend-mode: screen; will-change: transform; }
-.mgd-t-aurora .mgd-login-bg > span:nth-child(1) { width: 46vmax; height: 46vmax; left: -12vmax; top: -14vmax; background: var(--mgd-accent); animation: mgd-aur-a calc(24s / var(--mgd-speed)) ease-in-out infinite alternate; }
-.mgd-t-aurora .mgd-login-bg > span:nth-child(2) { width: 40vmax; height: 40vmax; right: -10vmax; bottom: -14vmax; background: color-mix(in srgb, var(--mgd-accent) 45%, #00d4ff); animation: mgd-aur-b calc(28s / var(--mgd-speed)) ease-in-out infinite alternate; }
-.mgd-t-aurora .mgd-login-bg > span:nth-child(3) { width: 30vmax; height: 30vmax; left: 38%; top: 32%; background: color-mix(in srgb, var(--mgd-accent) 50%, #ff4fd8); opacity: .4; animation: mgd-aur-c calc(32s / var(--mgd-speed)) ease-in-out infinite alternate; }
-@keyframes mgd-aur-a { to { transform: translate(18vmax, 12vmax) scale(1.2); } }
-@keyframes mgd-aur-b { to { transform: translate(-16vmax, -10vmax) scale(1.25); } }
-@keyframes mgd-aur-c { to { transform: translate(-14vmax, 10vmax) scale(.8); } }
+/* Nordlicht - Polarlicht Bänder, Berge, Sterne kommen aus effects.js */
+.mgd-t-aurora .mgd-login-bg { background: radial-gradient(140% 100% at 50% 115%, var(--mgd-bg2), var(--mgd-bg1) 62%); }
+.mgd-t-aurora .mgd-login-bg > span:nth-child(-n+3) { left: -25%; right: -25%; border-radius: 50%; filter: blur(40px); mix-blend-mode: screen; transform-origin: 50% 100%; will-change: transform; }
+.mgd-t-aurora .mgd-login-bg > span:nth-child(1) { top: 4vh; height: 44vh; opacity: .8; background: linear-gradient(90deg, transparent 8%, var(--mgd-accent) 32%, color-mix(in srgb, var(--mgd-accent) 45%, #3fa9ff) 56%, transparent 86%); animation: mgd-aur-1 calc(18s / var(--mgd-speed)) ease-in-out infinite alternate; }
+.mgd-t-aurora .mgd-login-bg > span:nth-child(2) { top: 14vh; height: 32vh; opacity: .55; background: linear-gradient(90deg, transparent 12%, #b06bff 38%, var(--mgd-accent) 64%, transparent 90%); animation: mgd-aur-2 calc(23s / var(--mgd-speed)) ease-in-out infinite alternate; }
+.mgd-t-aurora .mgd-login-bg > span:nth-child(3) { top: -2vh; height: 26vh; opacity: .45; background: linear-gradient(90deg, transparent 20%, #3fe0ff 45%, color-mix(in srgb, var(--mgd-accent) 60%, #ff6bd5) 70%, transparent 92%); animation: mgd-aur-3 calc(29s / var(--mgd-speed)) ease-in-out infinite alternate; }
+@keyframes mgd-aur-1 { 0% { transform: skewX(-18deg) translateX(-6%) scaleY(.7); } 50% { transform: skewX(10deg) translateX(4%) scaleY(1.12); } 100% { transform: skewX(-6deg) translateX(9%) scaleY(.85); } }
+@keyframes mgd-aur-2 { 0% { transform: skewX(14deg) translateX(7%) scaleY(1); } 100% { transform: skewX(-12deg) translateX(-8%) scaleY(.7); } }
+@keyframes mgd-aur-3 { 0% { transform: skewX(-8deg) translateX(-10%) scaleY(.8); } 100% { transform: skewX(16deg) translateX(6%) scaleY(1.2); } }
+/* Berge vorne, vor den Sternen */
+.mgd-t-aurora .mgd-login-bg > span:nth-child(4),
+.mgd-t-aurora .mgd-login-bg > span:nth-child(5) { left: 0; right: 0; bottom: 0; z-index: 4; }
+.mgd-t-aurora .mgd-login-bg > span:nth-child(4) { height: 36vh; background: linear-gradient(to bottom, color-mix(in srgb, var(--mgd-bg2) 80%, var(--mgd-accent)), var(--mgd-bg1)); opacity: .9; clip-path: polygon(0 100%, 0 58%, 7% 44%, 14% 54%, 23% 30%, 31% 50%, 39% 40%, 47% 60%, 56% 34%, 64% 50%, 73% 26%, 82% 47%, 90% 38%, 100% 52%, 100% 100%); }
+.mgd-t-aurora .mgd-login-bg > span:nth-child(5) { height: 24vh; background: var(--mgd-bg1); clip-path: polygon(0 100%, 0 52%, 10% 66%, 18% 40%, 27% 62%, 36% 50%, 45% 72%, 54% 46%, 63% 64%, 72% 42%, 81% 66%, 90% 50%, 100% 64%, 100% 100%); }
+.mgd-t-aurora .mgd-login-bg > span:nth-child(6) { left: 0; right: 0; bottom: 20vh; height: 30vh; background: radial-gradient(60% 100% at 50% 100%, color-mix(in srgb, var(--mgd-accent) 30%, transparent), transparent 70%); opacity: .6; }
+body.mgd-t-aurora #login form { border-color: color-mix(in srgb, var(--mgd-accent) 25%, var(--mgd-line)); }

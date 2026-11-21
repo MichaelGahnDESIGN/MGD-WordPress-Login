@@ -1,6 +1,14 @@
-/* Minimal Clean - ruhig, ein weicher Lichtfleck */
+/* Minimal Clean - Punktraster, weiches Licht, Karte links + großer Titel rechts */
+.mgd-t-minimal .mgd-login-bg { background: radial-gradient(color-mix(in srgb, var(--mgd-text) 13%, transparent) 1px, transparent 1.4px) 0 0 / 22px 22px, linear-gradient(160deg, var(--mgd-bg1), var(--mgd-bg2)); }
 .mgd-t-minimal .mgd-login-bg > span:nth-child(1) { width: 60vmax; height: 60vmax; left: -20vmax; top: -30vmax; border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--mgd-accent) 14%, transparent), transparent); animation: mgd-mi-drift calc(30s / var(--mgd-speed)) ease-in-out infinite alternate; }
 .mgd-t-minimal .mgd-login-bg > span:nth-child(2) { width: 50vmax; height: 50vmax; right: -16vmax; bottom: -26vmax; border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--mgd-accent) 10%, transparent), transparent); animation: mgd-mi-drift calc(36s / var(--mgd-speed)) ease-in-out infinite alternate-reverse; }
-.mgd-t-minimal .mgd-login-bg > span:nth-child(3) { display: none; }
+/* feine Linie als Akzent */
+.mgd-t-minimal .mgd-login-bg > span:nth-child(3) { right: 8vw; top: 50%; width: 1px; height: 40vh; margin-top: -20vh; background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--mgd-accent) 50%, transparent), transparent); animation: mgd-mi-line calc(6s / var(--mgd-speed)) ease-in-out infinite alternate; }
 @keyframes mgd-mi-drift { to { transform: translate(8vmax, 6vmax); } }
+@keyframes mgd-mi-line { to { opacity: .3; transform: scaleY(.7); } }
 body.mgd-t-minimal #login form { box-shadow: 0 1px 2px rgba(20, 30, 40, .06), 0 24px 48px -24px rgba(20, 30, 40, .22); border-color: rgba(20, 30, 40, .08); }
+body.mgd-t-minimal.mgd-light::after { background: radial-gradient(34vmax 34vmax at var(--mgd-lx, 50%) var(--mgd-ly, 30%), rgba(255, 255, 255, .7), color-mix(in srgb, var(--mgd-accent) 8%, transparent) 40%, transparent 70%); }
+.mgd-t-minimal.mgd-pos-left .mgd-login-hero { display: block; position: absolute; z-index: 4; right: 12vw; top: 50%; width: min(44vw, 640px); transform: translateY(-50%); color: var(--mgd-text); text-align: right; }
+.mgd-t-minimal .mgd-login-hero strong { font-size: clamp(36px, 5.2vw, 84px); line-height: 1.02; font-weight: 800; letter-spacing: -.035em; }
+.mgd-t-minimal .mgd-login-hero em { margin-top: 16px; font-size: clamp(15px, 1.3vw, 19px); color: var(--mgd-muted); }
+.mgd-t-minimal .mgd-login-hero::after { content: ""; display: block; width: 64px; height: 3px; margin: 22px 0 0 auto; border-radius: 3px; background: var(--mgd-accent); }

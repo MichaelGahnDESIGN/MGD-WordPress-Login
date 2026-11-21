@@ -1,20 +1,31 @@
-/* Split Screen - links Marke, rechts Formular */
+/* Split Screen - links Markenfläche mit fließendem Verlauf, rechts Formular */
 body.login.mgd-t-split { align-items: stretch; justify-content: center; padding: 28px 28px 28px 55%; background: var(--mgd-card); }
-.mgd-t-split .mgd-login-bg { right: auto; width: 55%; }
+.mgd-t-split .mgd-login-bg {
+	right: auto; width: 55%;
+	background:
+		radial-gradient(40% 50% at 20% 25%, color-mix(in srgb, var(--mgd-bg2) 90%, #fff) 0, transparent 70%),
+		radial-gradient(45% 55% at 85% 70%, color-mix(in srgb, var(--mgd-bg2) 70%, #ffd166) 0, transparent 70%),
+		radial-gradient(50% 60% at 40% 90%, color-mix(in srgb, var(--mgd-bg1) 60%, #4fd1c5) 0, transparent 70%),
+		linear-gradient(150deg, var(--mgd-bg1), var(--mgd-bg2));
+	background-size: 160% 160%, 170% 170%, 150% 150%, 100% 100%;
+	animation: mgd-sp-mesh calc(22s / var(--mgd-speed)) ease-in-out infinite alternate;
+}
+@keyframes mgd-sp-mesh { 0% { background-position: 0% 0%, 100% 100%, 50% 100%, 0 0; } 100% { background-position: 60% 40%, 20% 30%, 0% 20%, 0 0; } }
 body.mgd-t-split #login { align-self: center; margin: 0 auto; }
 body.mgd-t-split #login form { background: transparent; border: 0; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; padding-left: 0; padding-right: 0; }
-.mgd-t-split .mgd-login-footer, .mgd-t-split .privacy-policy-page-link { align-self: center; }
-.mgd-t-split .mgd-login-bg > span:nth-child(1) { width: 60vmin; height: 60vmin; right: -14vmin; top: -10vmin; border: 2px solid rgba(255, 255, 255, .22); border-radius: 50%; animation: mgd-sp-spin calc(40s / var(--mgd-speed)) linear infinite; }
-.mgd-t-split .mgd-login-bg > span:nth-child(2) { width: 34vmin; height: 34vmin; left: -8vmin; bottom: 4vmin; border-radius: 50%; background: linear-gradient(135deg, rgba(255, 255, 255, .22), rgba(255, 255, 255, 0)); animation: mgd-sp-float calc(12s / var(--mgd-speed)) ease-in-out infinite alternate; }
-.mgd-t-split .mgd-login-bg > span:nth-child(3) { width: 24vmin; height: 24vmin; right: 12%; bottom: 16%; border: 2px solid rgba(255, 255, 255, .3); border-radius: 50%; animation: mgd-sp-float calc(9s / var(--mgd-speed)) ease-in-out infinite alternate-reverse; }
+.mgd-t-split .mgd-login-footer, .mgd-t-split .privacy-policy-page-link, .mgd-t-split .language-switcher { align-self: center; }
+.mgd-t-split .mgd-login-bg > span:nth-child(1) { width: 62vmin; height: 62vmin; right: -14vmin; top: -10vmin; border: 2px solid rgba(255, 255, 255, .22); border-radius: 50%; animation: mgd-sp-spin calc(40s / var(--mgd-speed)) linear infinite; }
+.mgd-t-split .mgd-login-bg > span:nth-child(1)::after { content: ""; position: absolute; top: -7px; left: 50%; width: 12px; height: 12px; border-radius: 50%; background: #fff; box-shadow: 0 0 18px 4px rgba(255, 255, 255, .7); }
+.mgd-t-split .mgd-login-bg > span:nth-child(2) { width: 34vmin; height: 34vmin; left: -8vmin; bottom: 4vmin; border-radius: 50%; background: linear-gradient(135deg, rgba(255, 255, 255, .24), rgba(255, 255, 255, 0)); animation: mgd-sp-float calc(12s / var(--mgd-speed)) ease-in-out infinite alternate; }
+.mgd-t-split .mgd-login-bg > span:nth-child(3) { width: 24vmin; height: 24vmin; right: 12%; bottom: 18%; border: 2px solid rgba(255, 255, 255, .3); border-radius: 50%; animation: mgd-sp-float calc(9s / var(--mgd-speed)) ease-in-out infinite alternate-reverse; }
+.mgd-t-split .mgd-login-bg > span:nth-child(4) { left: 9%; top: 9%; width: 120px; height: 120px; background-image: radial-gradient(rgba(255, 255, 255, .5) 1.5px, transparent 2px); background-size: 20px 20px; opacity: .6; }
 @keyframes mgd-sp-spin { to { transform: rotate(360deg); } }
 @keyframes mgd-sp-float { to { transform: translate(3vmin, -5vmin) scale(1.08); } }
 .mgd-t-split .mgd-login-hero { display: block; position: absolute; z-index: 4; left: 9%; right: 9%; bottom: 12%; color: #fff; }
-.mgd-t-split .mgd-login-hero strong { display: block; font-size: clamp(28px, 4vw, 56px); line-height: 1.1; font-weight: 800; letter-spacing: -.02em; overflow-wrap: anywhere; }
-.mgd-t-split .mgd-login-hero em { display: block; margin-top: 12px; font-style: normal; font-size: clamp(15px, 1.4vw, 19px); opacity: .85; }
+.mgd-t-split .mgd-login-hero strong { font-size: clamp(30px, 4.2vw, 62px); line-height: 1.06; font-weight: 800; letter-spacing: -.025em; text-shadow: 0 2px 30px rgba(0, 0, 0, .2); }
+.mgd-t-split .mgd-login-hero em { margin-top: 14px; font-size: clamp(15px, 1.4vw, 19px); opacity: .88; }
 @media (max-width: 860px) {
 	body.login.mgd-t-split { padding: 28px 16px; background: var(--mgd-bg1); }
 	.mgd-t-split .mgd-login-bg { width: 100%; }
-	.mgd-t-split .mgd-login-hero { display: none; }
 	body.mgd-t-split #login form { background: color-mix(in srgb, var(--mgd-card) 94%, transparent); padding: 26px 22px; border-radius: 14px; }
 }

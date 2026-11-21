@@ -135,7 +135,7 @@ final class MGD_Login_Admin {
 					<div class="mgd-la-main">
 
 						<section class="mgd-la-box">
-							<h2><span>1</span> Template wählen</h2>
+							<h2><span>1</span> Layout wählen</h2>
 							<p class="description">Klick auf eine Karte. Die Vorschau rechts ändert sich sofort. Gespeichert wird erst mit dem Button unten.</p>
 							<div class="mgd-la-tpls" role="radiogroup" aria-label="Templates">
 								<?php foreach ( $all as $id => $tpl ) :
@@ -223,9 +223,25 @@ final class MGD_Login_Admin {
 						</section>
 
 						<section class="mgd-la-box">
-							<h2><span>6</span> Animation</h2>
+							<h2><span>6</span> Animation und Effekte</h2>
 							<p><label><input type="checkbox" name="<?php echo esc_attr( $this->name( 'animation' ) ); ?>" value="1" <?php checked( $s['animation'], 1 ); ?>> Animationen einschalten</label></p>
-							<?php $this->number( $s, 'speed', 'Tempo', 25, 300, '%', '100 = normal, 50 = halb so schnell, 200 = doppelt so schnell.' ); ?>
+							<p class="description">Jedes Layout bringt eigene Effekte mit. Hier kannst du sie ändern. „Wie das Layout“ heißt: so, wie das Layout es vorsieht.</p>
+							<div class="mgd-la-cols">
+								<?php
+								$labels = array( 'particles' => 'Partikel', 'light' => 'Lichtkegel folgt der Maus', 'card_fx' => 'Effekt auf der Karte', 'position' => 'Position der Karte' );
+								foreach ( MGD_Login_Templates::fx_choices() as $key => $choices ) {
+									echo '<p class="mgd-la-field"><label for="mgd-' . esc_attr( $key ) . '">' . esc_html( $labels[ $key ] ) . '</label><select id="mgd-' . esc_attr( $key ) . '" name="' . esc_attr( $this->name( $key ) ) . '">';
+									echo '<option value="">Wie das Layout</option>';
+									foreach ( $choices as $val => $text ) {
+										echo '<option value="' . esc_attr( $val ) . '" ' . selected( $s[ $key ], $val, false ) . '>' . esc_html( $text ) . '</option>';
+									}
+									echo '</select></p>';
+								}
+								$this->number( $s, 'particle_amount', 'Menge der Partikel', 10, 200, '%', '100 = normal. Weniger ist ruhiger und schont ältere Geräte.' );
+								$this->number( $s, 'speed', 'Tempo', 25, 300, '%', '100 = normal, 50 = halb so schnell, 200 = doppelt so schnell.' );
+								?>
+							</div>
+							<p class="description">Position „Links“ oder „Rechts“ gilt nur auf großen Bildschirmen. Auf dem Handy steht die Karte immer in der Mitte.</p>
 							<p class="description">⚠️ Wer in seinem Gerät „Bewegung reduzieren“ eingestellt hat, sieht automatisch keine Animation. Das ist Absicht.</p>
 						</section>
 
@@ -239,7 +255,7 @@ final class MGD_Login_Admin {
 
 						<p class="mgd-la-save">
 							<?php submit_button( 'Änderungen speichern', 'primary large', 'mgd_save', false ); ?>
-							<button type="button" class="button button-large" id="mgd-la-reset">Farben und Maße auf Template-Standard</button>
+							<button type="button" class="button button-large" id="mgd-la-reset">Farben, Maße und Effekte auf Layout-Standard</button>
 						</p>
 					</div>
 

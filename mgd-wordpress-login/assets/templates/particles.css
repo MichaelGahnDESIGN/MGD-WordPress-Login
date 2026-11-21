@@ -1,6 +1,8 @@
-/* Partikel-Netz - Canvas wird per JS eingefügt, hier nur Rahmen */
+/* Partikel-Netz - Netz + Lichtkegel + 3D Karte aus effects.js */
 .mgd-t-particles .mgd-login-bg { background: radial-gradient(90% 80% at 50% 40%, var(--mgd-bg2), var(--mgd-bg1)); }
-.mgd-t-particles .mgd-login-bg > span { display: none; }
-/* Ohne JS oder bei Animation aus: ruhiger Lichtfleck statt Netz */
-.mgd-t-particles .mgd-login-bg > span:nth-child(1) { display: block; left: 50%; top: 50%; width: 60vmin; height: 60vmin; margin: -30vmin 0 0 -30vmin; border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--mgd-accent) 22%, transparent), transparent); }
+/* ruhiger Lichtfleck, auch ohne JS */
+.mgd-t-particles .mgd-login-bg > span:nth-child(1) { left: 50%; top: 50%; width: 70vmin; height: 70vmin; margin: -35vmin 0 0 -35vmin; border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--mgd-accent) 22%, transparent), transparent); animation: mgd-pa-breathe calc(8s / var(--mgd-speed)) ease-in-out infinite alternate; }
+/* Ecken-Vignette */
+.mgd-t-particles .mgd-login-bg > span:nth-child(2) { inset: 0; z-index: 4; background: radial-gradient(120% 90% at 50% 50%, transparent 55%, rgba(0, 0, 0, .55)); }
+@keyframes mgd-pa-breathe { to { transform: scale(1.15); opacity: .7; } }
 body.mgd-t-particles #login form { border-color: color-mix(in srgb, var(--mgd-accent) 35%, transparent); }

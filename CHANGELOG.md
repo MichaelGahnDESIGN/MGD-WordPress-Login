@@ -1,5 +1,12 @@
 # Änderungen
 
+## Noch nicht veröffentlicht
+
+- 8 Layouts, alle überarbeitet und deutlich unterschiedlicher: Nordlicht (neu gestaltet), Milchglas, Neon Grid, Minimal Clean, Split Screen, Partikel-Netz, Sunset und neu **Kosmos**
+- Neue Effekte, frei wählbar: Partikel (Sterne, Schnee, Glühwürmchen, Seifenblasen, Punktenetz, Sternenflug, Konfetti), Menge der Partikel, Lichtkegel folgt der Maus, Karten-Effekt (3D-Neigung, kreisender Leuchtrand, Glanz-Streifen), Position der Karte (Mitte, links, rechts)
+- Minimal Clean und Kosmos zeigen auf großen Bildschirmen einen großen Titel neben der Karte
+- Alle Effekte laufen lokal, ohne fremde Dateien. Bei „Bewegung reduzieren“ oder ausgeschalteter Animation steht alles still
+
 ## 1.5.0
 
 - Neu: Das Plugin meldet sich höchstens einmal am Tag bei theme.michael-gahn.de. Gesendet werden nur Plugin-Name, Version, Shopsystem, Domain und eine zufällige Installations-ID

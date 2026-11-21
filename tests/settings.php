@@ -61,4 +61,14 @@ check( 'Logo SVG: Verhältnis aus viewBox', abs( MGD_Login_Frontend::logo_ratio(
 check( 'Logo SVG ohne Maße: Standard-Verhältnis', 3.0 === MGD_Login_Frontend::logo_ratio( 13 ) );
 array_map( 'unlink', $GLOBALS['mgd_test_files'] );
 
+// 8 Layouts + Effekte
+check( 'Genau 8 Layouts', 8 === count( MGD_Login_Templates::all() ) );
+check( 'Jedes Layout hat Effekt-Standard', ! in_array( false, array_map( static fn( $t ) => ! empty( $t['fx'] ) && is_file( __DIR__ . '/../mgd-wordpress-login/assets/templates/' . basename( $t['css'] ) ), MGD_Login_Templates::all() ), true ) );
+$fx = MGD_Login_Templates::fx( 'cosmos', array() );
+check( 'Kosmos: Sternenflug und Karte rechts', 'warp' === $fx['particles'] && 'right' === $fx['position'] );
+$fx = MGD_Login_Templates::fx( 'cosmos', array( 'particles' => 'snow', 'position' => 'left', 'card_fx' => 'kaputt' ) );
+check( 'Eigene Effekte überschreiben das Layout, Unsinn wird ignoriert', 'snow' === $fx['particles'] && 'left' === $fx['position'] && 'none' === $fx['card_fx'] );
+$e = MGD_Login_Settings::sanitize( array( 'particles' => '<script>', 'light' => 'on', 'particle_amount' => '9999' ) );
+check( 'Effekt-Einstellungen werden bereinigt', '' === $e['particles'] && 'on' === $e['light'] && 200 === $e['particle_amount'] );
+
 exit( $fails ? 1 : 0 );
