@@ -2,7 +2,7 @@
 
 Ein richtig schöner Login für WordPress. Du wählst ein Template, passt Farben, Logo und Hintergrund an und siehst das Ergebnis sofort live. Ohne Schriften-Download und ohne fremde Tracker.
 
-> Stand: Version 1.6.0. Getestet mit WordPress 6.x und PHP 8.5.
+> Stand: Version 1.7.0. Getestet mit WordPress 6.x und PHP 8.5.
 
 ## Was kann das Plugin?
 
@@ -43,7 +43,7 @@ Unter **MGD Login → 6 Animation und Effekte**:
 
 ## Installation (Schritt für Schritt)
 
-1. ZIP-Datei `mgd-wordpress-login-1.6.0.zip` aus den [Releases](https://github.com/MichaelGahnDESIGN/MGD-WordPress-Login/releases) laden.
+1. ZIP-Datei `mgd-wordpress-login-1.7.0.zip` aus den [Releases](https://github.com/MichaelGahnDESIGN/MGD-WordPress-Login/releases) laden.
 2. In WordPress: **Plugins → Installieren → Plugin hochladen**.
 3. ZIP auswählen, **Installieren**, dann **Aktivieren**.
 4. Links im Menü erscheint **MGD Login**. Dort geht es los.
@@ -78,10 +78,10 @@ Gut zu wissen:
 
 - Die ZIP-Datei kommt von GitHub, der Fingerabdruck von theme.michael-gahn.de. Beides muss zusammenpassen.
 - Ist theme.michael-gahn.de mal nicht erreichbar, siehst du einfach kein Update. Deine Seite und der Login laufen normal weiter.
-- Sofort nachsehen: Button **MGD-Updates jetzt prüfen** unter Dashboard → Aktualisierungen.
+- Den Update-Stand siehst du auch unter **MGD Login → Info und Updates**.
 - Ein ZIP selbst hochladen (Plugins → Installieren → Plugin hochladen) geht weiterhin.
 - Ein Download-Link zu einer älteren Version auf GitHub wird bei aktivem Plugin abgelehnt. Ältere Versionen spielst du über **Plugin hochladen** ein.
-- Von Version 0.1.1 auf 0.1.2 läuft das Update noch über den alten Weg. Ab 0.1.2 gilt der neue Weg.
+- Ab Version 1.7.0 laufen Updates über den gemeinsamen MGD-Baukasten. Beim Löschen des Plugins meldet es sich bei theme.michael-gahn.de ab.
 
 ## Datenschutz
 
@@ -89,7 +89,7 @@ Gut zu wissen:
 - Alles läuft lokal von deinem Server
 - Nur für Updates fragt WordPress bei theme.michael-gahn.de und GitHub an. Dabei sehen die Server die Adresse (IP) deines Servers.
 - Meldet sich höchstens einmal am Tag bei theme.michael-gahn.de (Plugin, Version, Shopsystem, Domain, zufällige ID). Abschaltbar in den Einstellungen.
-- So schaltest du das ab: **MGD Login** öffnen, ganz unten bei **Installation melden** den Haken entfernen und **Speichern** klicken. Der Eintrag auf theme.michael-gahn.de wird dann gelöscht. Das Plugin funktioniert genauso weiter.
+- So schaltest du das ab: **MGD Login → Info und Updates** öffnen, bei **Installation melden** den Haken entfernen und **Speichern** klicken. Der Eintrag auf theme.michael-gahn.de wird dann gelöscht. Das Plugin funktioniert genauso weiter.
 - Beim Löschen des Plugins bleiben Einstellungen erhalten, außer du hakst „Einstellungen beim Löschen entfernen“ an
 
 ## Eigene Templates oder Pro-Templates (für Entwickler)

@@ -3,7 +3,7 @@ Contributors: michaelgahndesign
 Tags: login, login page, custom login, design
 Requires at least: 6.5
 Requires PHP: 8.1
-Stable tag: 1.6.0
+Stable tag: 1.7.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,6 +31,9 @@ Updates kommen über theme.michael-gahn.de und GitHub. Vor dem Einspielen wird d
 4. Links im Menü erscheint „MGD Login“.
 
 == Changelog ==
+
+= 1.7.0 =
+* Umstellung auf den gemeinsamen MGD-Baukasten, neue Seite „Info und Updates“
 
 = 1.6.0 =
 * 8 überarbeitete Layouts, neu: Kosmos

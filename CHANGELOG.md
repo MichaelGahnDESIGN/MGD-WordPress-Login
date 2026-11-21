@@ -1,5 +1,14 @@
 # Änderungen
 
+## 1.7.0
+
+- Umstellung auf den gemeinsamen MGD-Baukasten: Updates von theme.michael-gahn.de mit Prüfsumme, Anmeldung der Installation, Liste „Weitere Plugins“
+- Neue Seite **MGD Login → Info und Updates** mit Version, Update-Stand, weiteren Plugins und dem Schalter „Installation melden“
+- Der Schalter „Installation melden“ ist von der Einstellungsseite auf die Seite „Info und Updates“ umgezogen
+- Beim Löschen des Plugins meldet es sich bei theme.michael-gahn.de ab
+- Alte Update-Prüfung und alte Seite „Weitere Plugins“ sind abgeschaltet. Alte Zwischenspeicher werden einmal aufgeräumt
+- Keine Änderung am Aussehen der Login-Seite. Deine Einstellungen bleiben erhalten
+
 ## 1.6.0
 
 - 8 Layouts, alle überarbeitet und deutlich unterschiedlicher: Nordlicht (neu gestaltet), Milchglas, Neon Grid, Minimal Clean, Split Screen, Partikel-Netz, Sunset und neu **Kosmos**

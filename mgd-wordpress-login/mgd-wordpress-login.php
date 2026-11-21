@@ -3,7 +3,7 @@
  * Plugin Name: MGD WordPress Login
  * Plugin URI: https://github.com/MichaelGahnDESIGN/MGD-WordPress-Login
  * Description: Ein richtig schöner Login mit Templates, Animationen und eigenen Farben, Logo und Hintergrund. Ohne externe Dienste.
- * Version: 1.6.0
+ * Version: 1.7.0
  * Requires at least: 6.5
  * Requires PHP: 8.1
  * Author: Michael Gahn DESIGN
@@ -16,7 +16,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'MGD_LOGIN_VERSION', '1.6.0' );
+define( 'MGD_LOGIN_VERSION', '1.7.0' );
 define( 'MGD_LOGIN_FILE', __FILE__ );
 define( 'MGD_LOGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'MGD_LOGIN_URL', plugin_dir_url( __FILE__ ) );
@@ -24,41 +24,31 @@ define( 'MGD_LOGIN_URL', plugin_dir_url( __FILE__ ) );
 require_once MGD_LOGIN_DIR . 'includes/class-mgd-login-settings.php';
 require_once MGD_LOGIN_DIR . 'includes/class-mgd-login-templates.php';
 require_once MGD_LOGIN_DIR . 'includes/class-mgd-login-frontend.php';
-require_once MGD_LOGIN_DIR . 'includes/class-mgd-wordpress-plugin-catalog.php';
 require_once MGD_LOGIN_DIR . 'includes/class-mgd-login-admin.php';
 require_once MGD_LOGIN_DIR . 'includes/class-mgd-login-plugin.php';
-require_once MGD_LOGIN_DIR . 'includes/class-mgd-login-updater.php';
 
 register_activation_hook( __FILE__, array( 'MGD_Login_Plugin', 'activate' ) );
 
 MGD_Login_Plugin::boot();
 
-// Updates nur über theme.michael-gahn.de mit SHA-256 Prüfung, auch im Cron
-MGD_Login_Updater::register( __FILE__ );
+// Baukasten aus MichaThemeV5-Pro > includes/Kit (bin/build-plugin-kit.php), nicht von Hand ändern
+spl_autoload_register( static function ( string $class ): void {
+	$prefix = 'Mgd\\WordPressLogin\\Kit\\';
+	if ( str_starts_with( $class, $prefix ) ) {
+		$file = MGD_LOGIN_DIR . 'includes/Kit/' . str_replace( '\\', '/', substr( $class, strlen( $prefix ) ) ) . '.php';
+		if ( is_file( $file ) ) {
+			require $file;
+		}
+	}
+} );
 
-// Free-Lizenz Meldung > Install-Client aus MichaThemeV5-Pro (bin/build-install-client.php), nicht von Hand ändern
-foreach ( array( 'Store', 'Transport', 'Response', 'CallbackStore', 'CurlTransport', 'InstallClient', 'Factory', 'Settings', 'Platform/WordPress' ) as $mgd_login_ic ) {
-	require_once MGD_LOGIN_DIR . 'includes/install-client/' . $mgd_login_ic . '.php';
-}
-unset( $mgd_login_ic );
-try {
-	\Mgd\WordPressLogin\Install\Platform\WordPress::boot( __FILE__, 'mgd-wordpress-login', 'wordpress', MGD_LOGIN_VERSION, admin_url( 'admin.php?page=mgd-login-settings#mgd-login-install' ) );
-} catch ( \Throwable $e ) {
-	// Plugin läuft auch ohne Meldung weiter
-	unset( $e );
-}
+// Updater vom Baukasten, startet auch den Install-Melder. Alter Updater, alter Install-Client, Katalog + Admin-Tools sind raus (Dateien fliegen erst in der Endversion)
+MGD_Login_Plugin::$updater = \Mgd\WordPressLogin\Kit\Platform\WordPress\Setup::updater( __FILE__, 'mgd-wordpress-login', 'wordpress', MGD_LOGIN_VERSION, 'MGD WordPress Login', admin_url( 'admin.php?page=mgd-login-plugins' ) );
+// Reste vom alten Updater + Katalog wegräumen, 1x pro Version
+\Mgd\WordPressLogin\Kit\Platform\WordPress\Setup::cleanupLegacy( 'mgd-wordpress-login', MGD_LOGIN_VERSION, array( 'mgd_login_update_manifest', 'mgd_admin_release_*', 'mgd_wordpress_catalog_v3', 'mgd_catalog_v3_release_*' ) );
 
-// Plugin-Links + Details wie bei den anderen MGD Plugins, ohne 'package' > keine GitHub-Updates mehr
-require_once __DIR__ . '/includes/class-mgd-plugin-admin-tools.php';
-\MGD_Plugin_Admin_Tools_20261023::register([
-    'file' => __FILE__,
-    'repo' => 'MGD-WordPress-Login',
-    'slug' => 'mgd-wordpress-login',
-    'name' => 'MGD WordPress Login',
-    'description' => 'Ein richtig schöner Login mit Templates, Animationen und eigenen Farben, Logo und Hintergrund.',
-    'version' => '1.6.0',
-    'settings' => 'admin.php?page=mgd-login-settings',
-    'requires' => '6.5',
-    'php' => '8.1',
-    'caches' => [MGD_Login_Updater::CACHE],
-]);
+// Link Einstellungen in der Plugin-Liste
+add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), static function ( array $links ): array {
+	array_unshift( $links, '<a href="' . esc_url( admin_url( 'admin.php?page=mgd-login-settings' ) ) . '">Einstellungen</a>' );
+	return $links;
+} );

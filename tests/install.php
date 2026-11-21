@@ -15,11 +15,18 @@ function wp_nonce_field( $a, $n, $r, $e ) { return '<input type="hidden" name="'
 function register_activation_hook( $f, $cb ) { $GLOBALS['hooks']['activate'] = $cb; }
 function add_action( $h, $cb ) { $GLOBALS['hooks'][ $h ] = $cb; }
 
-foreach ( array( 'Store', 'Transport', 'Response', 'CallbackStore', 'CurlTransport', 'InstallClient', 'Factory', 'Settings', 'Platform/WordPress' ) as $f ) {
-	require __DIR__ . '/../mgd-wordpress-login/includes/install-client/' . $f . '.php';
-}
-use Mgd\WordPressLogin\Install\Platform\WordPress;
-use Mgd\WordPressLogin\Install\Settings;
+// ab 1.7.0 aus dem Baukasten (includes/Kit), gleicher Autoloader wie im Plugin
+spl_autoload_register( static function ( string $class ): void {
+	$prefix = 'Mgd\\WordPressLogin\\Kit\\';
+	if ( str_starts_with( $class, $prefix ) ) {
+		$file = __DIR__ . '/../mgd-wordpress-login/includes/Kit/' . str_replace( '\\', '/', substr( $class, strlen( $prefix ) ) ) . '.php';
+		if ( is_file( $file ) ) {
+			require $file;
+		}
+	}
+} );
+use Mgd\WordPressLogin\Kit\Install\Platform\WordPress;
+use Mgd\WordPressLogin\Kit\Install\Settings;
 
 $fails = 0;
 function check( string $name, bool $ok ): void {
