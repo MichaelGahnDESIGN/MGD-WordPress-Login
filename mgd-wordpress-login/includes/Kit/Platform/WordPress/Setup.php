@@ -13,6 +13,9 @@ use Mgd\WordPressLogin\Kit\License\{CurlPost, LicenseClient};
 final class Setup
 {
     public const PRODUCT_RE = '/^[a-z0-9]+(?:-[a-z0-9]+)*$/D';
+    // Installieren-Knopf je Produkt nur 1x anmelden
+    /** @var array<string,true> */
+    private static array $catalogRegistered = [];
 
     /**
      * Updater + Hinweis anmelden, startet auch den Install-Client (WordPress::boot) mit. $platform = wordpress oder woocommerce
@@ -44,7 +47,11 @@ final class Setup
                 return false;
             }
 
-            return InstallBoot::start($pluginFile, $product, $platform, $version, $settingsUrl !== '' ? $settingsUrl : self::dashboardUrl($product));
+            $url = $settingsUrl !== '' ? $settingsUrl : self::dashboardUrl($product);
+            // Installieren bei Weitere Plugins schon beim Laden anmelden, admin-post.php baut keine Admin-Seite auf
+            self::catalogAuto($product, $platform, $url);
+
+            return InstallBoot::start($pluginFile, $product, $platform, $version, $url);
         } catch (\Throwable) {
             return false;
         }
@@ -223,8 +230,8 @@ final class Setup
     }
 
     /**
-     * Knopf "Installieren" bei Weitere Plugins anmelden (admin-post.php). Setup::dashboard macht das schon
-     * nur nötig, wenn du RecommendationsView::render($liste, $product) auf einer eigenen Seite ausgibst
+     * Knopf "Installieren" bei Weitere Plugins anmelden (admin-post.php). Setup::updater()/boot() machen das schon beim Laden,
+     * Setup::dashboard auch. Von Hand nur, wenn dein Plugin weder updater() noch boot() aufruft
      */
     public static function catalogActions(string $product, ?Recommendations $recommendations, string $returnUrl = ''): void
     {
@@ -232,10 +239,35 @@ final class Setup
             if ($recommendations === null || preg_match(self::PRODUCT_RE, $product) !== 1) {
                 return;
             }
+            if (isset(self::$catalogRegistered[$product])) {
+                return;
+            }
+            self::$catalogRegistered[$product] = true;
             $i = new CatalogInstaller($product, $recommendations, $returnUrl);
             \add_action('admin_post_' . CatalogInstaller::action($product), [$i, 'handle']);
         } catch (\Throwable) {
         }
+    }
+
+    // aus boot()/updater(): Liste erst beim Klick laden (gleicher Speicher wie die Ansicht), eigenes Plugin ist eh installiert
+    private static function catalogAuto(string $product, string $platform, string $returnUrl): void
+    {
+        if (isset(self::$catalogRegistered[$product]) || !function_exists('add_action')) {
+            return;
+        }
+        self::$catalogRegistered[$product] = true;
+        \add_action('admin_post_' . CatalogInstaller::action($product), static function () use ($product, $platform, $returnUrl): void {
+            $r = self::recommendations($product, $platform, '');
+            if ($r !== null) {
+                (new CatalogInstaller($product, $r, $returnUrl))->handle();
+            }
+        });
+    }
+
+    /** nur Tests: Merker zurücksetzen */
+    public static function resetCatalogActions(): void
+    {
+        self::$catalogRegistered = [];
     }
 
     // gleiche Option wie WordPress::client, Transport nur für Tests austauschbar. Version egal fürs Löschen

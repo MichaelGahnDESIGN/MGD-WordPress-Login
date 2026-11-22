@@ -1,5 +1,12 @@
 # Änderungen
 
+## 1.8.0
+
+- Aufräum-Version: Der alte Update-Code, die alte Anmeldung der Installation und alte Hilfsdateien sind gelöscht. Das alles macht seit 1.7.0 der gemeinsame MGD-Baukasten
+- Baukasten auf den neuesten Stand gebracht. Der Knopf „Installieren“ bei „Weitere Plugins“ wird jetzt vom Baukasten selbst angemeldet
+- Neuer Test `php tests/kit.php` ersetzt den alten Update-Test
+- Keine Änderung an der Login-Seite. Deine Einstellungen bleiben erhalten
+
 ## 1.7.1
 
 - Neue Ansicht **Weitere Plugins** auf der Seite **MGD Login → Info und Updates**: große Karten mit Bildern, Kategorien, Suche, Filter und ein Fenster mit Details

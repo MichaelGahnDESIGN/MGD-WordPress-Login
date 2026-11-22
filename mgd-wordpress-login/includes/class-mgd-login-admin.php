@@ -9,12 +9,6 @@ final class MGD_Login_Admin {
 		add_action( 'admin_menu', array( $this, 'menu' ) );
 		add_action( 'admin_init', array( $this, 'settings' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'assets' ) );
-		// Knopf Installieren bei Weitere Plugins > admin-post.php, läuft nicht über plugins_page()
-		add_action( 'admin_init', array( $this, 'catalog_actions' ) );
-	}
-
-	public function catalog_actions(): void {
-		\Mgd\WordPressLogin\Kit\Platform\WordPress\Setup::catalogActions( 'mgd-wordpress-login', self::recommendations(), admin_url( 'admin.php?page=mgd-login-plugins' ) );
 	}
 
 	private static function recommendations(): ?\Mgd\WordPressLogin\Kit\Catalog\Recommendations {

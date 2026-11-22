@@ -3,7 +3,7 @@
  * Plugin Name: MGD WordPress Login
  * Plugin URI: https://github.com/MichaelGahnDESIGN/MGD-WordPress-Login
  * Description: Ein richtig schöner Login mit Templates, Animationen und eigenen Farben, Logo und Hintergrund. Ohne externe Dienste.
- * Version: 1.7.1
+ * Version: 1.8.0
  * Requires at least: 6.5
  * Requires PHP: 8.1
  * Author: Michael Gahn DESIGN
@@ -16,7 +16,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'MGD_LOGIN_VERSION', '1.7.1' );
+define( 'MGD_LOGIN_VERSION', '1.8.0' );
 define( 'MGD_LOGIN_FILE', __FILE__ );
 define( 'MGD_LOGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'MGD_LOGIN_URL', plugin_dir_url( __FILE__ ) );
@@ -42,7 +42,7 @@ spl_autoload_register( static function ( string $class ): void {
 	}
 } );
 
-// Updater vom Baukasten, startet auch den Install-Melder. Alter Updater, alter Install-Client, Katalog + Admin-Tools sind raus (Dateien fliegen erst in der Endversion)
+// Updater vom Baukasten, startet auch den Install-Melder + Installieren-Knopf bei Weitere Plugins
 MGD_Login_Plugin::$updater = \Mgd\WordPressLogin\Kit\Platform\WordPress\Setup::updater( __FILE__, 'mgd-wordpress-login', 'wordpress', MGD_LOGIN_VERSION, 'MGD WordPress Login', admin_url( 'admin.php?page=mgd-login-plugins' ) );
 // Reste vom alten Updater + Katalog wegräumen, 1x pro Version
 \Mgd\WordPressLogin\Kit\Platform\WordPress\Setup::cleanupLegacy( 'mgd-wordpress-login', MGD_LOGIN_VERSION, array( 'mgd_login_update_manifest', 'mgd_admin_release_*', 'mgd_wordpress_catalog_v3', 'mgd_catalog_v3_release_*' ) );
