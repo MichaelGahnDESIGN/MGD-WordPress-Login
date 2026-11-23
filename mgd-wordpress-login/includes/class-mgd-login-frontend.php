@@ -99,6 +99,8 @@ final class MGD_Login_Frontend {
 		$font  = $fonts[ $s['font'] ][1] ?? $fonts['system'][1];
 		$logo  = $s['logo_id'] ? wp_get_attachment_image_url( (int) $s['logo_id'], 'full' ) : '';
 		$bg    = $s['bg_id'] ? wp_get_attachment_image_url( (int) $s['bg_id'], 'full' ) : '';
+		$mode  = MGD_Login_Settings::bg_modes()[ $s['bg_mode'] ] ?? MGD_Login_Settings::bg_modes()['cover'];
+		$pos   = MGD_Login_Settings::bg_positions()[ $s['bg_pos'] ] ?? MGD_Login_Settings::bg_positions()['center'];
 		$url   = static fn( string $u ): string => 'url("' . str_replace( array( '"', '\\', "\n", "\r" ), array( '%22', '%5C', '', '' ), esc_url_raw( $u ) ) . '")';
 
 		$decl = array(
@@ -119,6 +121,9 @@ final class MGD_Login_Frontend {
 			'--mgd-font'       => $font,
 			'--mgd-logo'       => $logo ? $url( $logo ) : 'none',
 			'--mgd-bg-image'   => $bg ? $url( $bg ) : 'none',
+			'--mgd-bg-size'    => $mode[1],
+			'--mgd-bg-repeat'  => $mode[2],
+			'--mgd-bg-pos'     => $pos[1],
 		);
 		$out = '';
 		foreach ( $decl as $name => $value ) {

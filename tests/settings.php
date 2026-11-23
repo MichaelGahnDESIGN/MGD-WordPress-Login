@@ -71,4 +71,12 @@ check( 'Eigene Effekte überschreiben das Layout, Unsinn wird ignoriert', 'snow'
 $e = MGD_Login_Settings::sanitize( array( 'particles' => '<script>', 'light' => 'on', 'particle_amount' => '9999' ) );
 check( 'Effekt-Einstellungen werden bereinigt', '' === $e['particles'] && 'on' === $e['light'] && 200 === $e['particle_amount'] );
 
+// Hintergrundbild: Anzeige-Art + Ausrichtung
+$b = MGD_Login_Settings::sanitize( array( 'bg_mode' => 'repeat', 'bg_pos' => 'top-right' ) );
+check( 'Hintergrund: gültige Anzeige-Art und Ausrichtung bleiben', 'repeat' === $b['bg_mode'] && 'top-right' === $b['bg_pos'] );
+$b = MGD_Login_Settings::sanitize( array( 'bg_mode' => 'x;}', 'bg_pos' => 'url(evil)' ) );
+check( 'Hintergrund: Unsinn fällt auf Ausschnitt + Mitte zurück', 'cover' === $b['bg_mode'] && 'center' === $b['bg_pos'] );
+$b = MGD_Login_Settings::sanitize( array() );
+check( 'Hintergrund: Standard ist Ausschnitt + Mitte', 'cover' === $b['bg_mode'] && 'center' === $b['bg_pos'] );
+
 exit( $fails ? 1 : 0 );

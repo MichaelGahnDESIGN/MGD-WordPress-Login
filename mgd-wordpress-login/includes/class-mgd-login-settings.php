@@ -17,6 +17,32 @@ final class MGD_Login_Settings {
 		);
 	}
 
+	// Hintergrundbild Anzeige-Art: Name > Label, size, repeat
+	public static function bg_modes(): array {
+		return array(
+			'cover'    => array( 'Ausschnitt (füllt alles, Rand wird abgeschnitten)', 'cover', 'no-repeat' ),
+			'contain'  => array( 'Ganz zeigen (kleiner, ohne Abschneiden)', 'contain', 'no-repeat' ),
+			'stretch'  => array( 'Strecken (über den ganzen Platz, verzerrt)', '100% 100%', 'no-repeat' ),
+			'repeat'   => array( 'Wiederholen (Kachel-Muster)', 'auto', 'repeat' ),
+			'original' => array( 'Originalgröße (einmal)', 'auto', 'no-repeat' ),
+		);
+	}
+
+	// Hintergrundbild Ausrichtung: Name > Label, CSS-Position
+	public static function bg_positions(): array {
+		return array(
+			'center'       => array( 'Mitte', 'center center' ),
+			'top'          => array( 'Oben', 'center top' ),
+			'bottom'       => array( 'Unten', 'center bottom' ),
+			'left'         => array( 'Links', 'left center' ),
+			'right'        => array( 'Rechts', 'right center' ),
+			'top-left'     => array( 'Oben links', 'left top' ),
+			'top-right'    => array( 'Oben rechts', 'right top' ),
+			'bottom-left'  => array( 'Unten links', 'left bottom' ),
+			'bottom-right' => array( 'Unten rechts', 'right bottom' ),
+		);
+	}
+
 	public static function defaults(): array {
 		return array(
 			'template'     => 'aurora',
@@ -34,6 +60,8 @@ final class MGD_Login_Settings {
 			'logo_height'  => 80,
 			'logo_mode'    => 'name',
 			'bg_id'        => 0,
+			'bg_mode'      => 'cover',
+			'bg_pos'       => 'center',
 			'font'         => 'system',
 			'title'        => '',
 			'subtitle'     => '',
@@ -93,6 +121,10 @@ final class MGD_Login_Settings {
 
 		$out['logo_id']     = self::image_id( $raw['logo_id'] ?? 0 );
 		$out['bg_id']       = self::image_id( $raw['bg_id'] ?? 0 );
+		$bg_mode            = (string) ( $raw['bg_mode'] ?? 'cover' );
+		$out['bg_mode']     = isset( self::bg_modes()[ $bg_mode ] ) ? $bg_mode : 'cover';
+		$bg_pos             = (string) ( $raw['bg_pos'] ?? 'center' );
+		$out['bg_pos']      = isset( self::bg_positions()[ $bg_pos ] ) ? $bg_pos : 'center';
 		$height             = self::num( $raw, 'logo_height', 24, 200 );
 		$out['logo_height'] = '' === $height ? 80 : $height;
 		$mode               = (string) ( $raw['logo_mode'] ?? 'name' );

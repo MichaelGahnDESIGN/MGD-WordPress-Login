@@ -37,7 +37,10 @@ html:has(body.login.mgd-login), html body.login.mgd-login { height: auto; }
 	position: absolute;
 	inset: 0;
 	z-index: 1;
-	background: var(--mgd-bg-image) center / cover no-repeat;
+	background-image: var(--mgd-bg-image);
+	background-position: var(--mgd-bg-pos, center center);
+	background-size: var(--mgd-bg-size, cover);
+	background-repeat: var(--mgd-bg-repeat, no-repeat);
 }
 .mgd-login-bg::after {
 	content: "";

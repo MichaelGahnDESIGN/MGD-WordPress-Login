@@ -221,6 +221,21 @@ final class MGD_Login_Admin {
 								<?php $this->media( $s, 'bg_id', 'Hintergrundbild (optional)', 'Bild wählen' ); ?>
 							</div>
 							<div class="mgd-la-cols">
+								<p class="mgd-la-field"><label for="mgd-bg_mode">Hintergrundbild zeigen als</label>
+									<select id="mgd-bg_mode" name="<?php echo esc_attr( $this->name( 'bg_mode' ) ); ?>">
+										<?php foreach ( MGD_Login_Settings::bg_modes() as $key => $m ) : ?>
+											<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $s['bg_mode'], $key ); ?>><?php echo esc_html( $m[0] ); ?></option>
+										<?php endforeach; ?>
+									</select></p>
+								<p class="mgd-la-field"><label for="mgd-bg_pos">Ausrichtung des Bildes</label>
+									<select id="mgd-bg_pos" name="<?php echo esc_attr( $this->name( 'bg_pos' ) ); ?>">
+										<?php foreach ( MGD_Login_Settings::bg_positions() as $key => $m ) : ?>
+											<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $s['bg_pos'], $key ); ?>><?php echo esc_html( $m[0] ); ?></option>
+										<?php endforeach; ?>
+									</select>
+									<span class="description">Zeigt, welcher Teil vom Bild sichtbar bleibt.</span></p>
+							</div>
+							<div class="mgd-la-cols">
 								<?php $this->number( $s, 'logo_height', 'Logo-Höhe', 24, 200, 'px' ); ?>
 								<p class="mgd-la-field"><label for="mgd-logo_mode">Ohne Logo zeigen</label>
 									<select id="mgd-logo_mode" name="<?php echo esc_attr( $this->name( 'logo_mode' ) ); ?>">

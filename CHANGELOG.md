@@ -1,5 +1,11 @@
 # Änderungen
 
+## 1.8.1
+
+- Neu: Das Hintergrundbild lässt sich einstellen. „Hintergrundbild zeigen als“: Ausschnitt (wie bisher), ganz zeigen, strecken, wiederholen oder Originalgröße
+- Neu: „Ausrichtung des Bildes“ (Mitte, oben, unten, links, rechts und die vier Ecken). Das gilt für alle 8 Layouts
+- Bisherige Seiten sehen gleich aus, denn der Standard ist weiter „Ausschnitt“ und „Mitte“. Deine Einstellungen bleiben erhalten
+
 ## 1.8.0
 
 - Aufräum-Version: Der alte Update-Code, die alte Anmeldung der Installation und alte Hilfsdateien sind gelöscht. Das alles macht seit 1.7.0 der gemeinsame MGD-Baukasten
