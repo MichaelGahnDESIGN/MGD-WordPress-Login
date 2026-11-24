@@ -5,21 +5,12 @@ defined( 'ABSPATH' ) || exit;
 final class MGD_Login_Admin {
 	const SLUG = 'mgd-login-settings';
 
+	// Variablen vom gewählten Template, für die Farbfelder
+	private array $tpl_vars = array();
+
 	public function register(): void {
-		add_action( 'admin_menu', array( $this, 'menu' ) );
 		add_action( 'admin_init', array( $this, 'settings' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'assets' ) );
-	}
-
-	private static function recommendations(): ?\Mgd\WordPressLogin\Kit\Catalog\Recommendations {
-		return \Mgd\WordPressLogin\Kit\Platform\WordPress\Setup::recommendations( 'mgd-wordpress-login', 'wordpress', 'plugin-login-wordpress', self::fallback_plugins(), 'MGD-WordPress-Login' );
-	}
-
-	public function menu(): void {
-		add_menu_page( 'MGD WordPress Login', 'MGD Login', 'manage_options', self::SLUG, array( $this, 'page' ), 'dashicons-lock', 81 );
-		// Dashboard vom Baukasten: Info, Updates, Weitere Plugins, Installation melden
-		add_submenu_page( self::SLUG, 'MGD WordPress Login', 'Einstellungen', 'manage_options', self::SLUG, array( $this, 'page' ) );
-		add_submenu_page( self::SLUG, 'Info und Updates', 'Info und Updates', 'manage_options', 'mgd-login-plugins', array( $this, 'plugins_page' ) );
 	}
 
 	public function settings(): void {
@@ -35,13 +26,12 @@ final class MGD_Login_Admin {
 	}
 
 	public function assets( string $hook ): void {
-		if ( 'toplevel_page_' . self::SLUG !== $hook ) {
+		if ( ! str_ends_with( $hook, '_page_' . self::SLUG ) ) {
 			return;
 		}
 		wp_enqueue_media();
-		wp_enqueue_style( 'wp-color-picker' );
 		wp_enqueue_style( 'mgd-login-admin', MGD_LOGIN_URL . 'assets/admin.css', array(), MGD_LOGIN_VERSION );
-		wp_enqueue_script( 'mgd-login-admin', MGD_LOGIN_URL . 'assets/js/admin.js', array( 'jquery', 'wp-color-picker' ), MGD_LOGIN_VERSION, true );
+		wp_enqueue_script( 'mgd-login-admin', MGD_LOGIN_URL . 'assets/js/admin.js', array( 'jquery' ), MGD_LOGIN_VERSION, true );
 
 		$defaults = array();
 		foreach ( MGD_Login_Templates::all() as $id => $tpl ) {
@@ -62,9 +52,12 @@ final class MGD_Login_Admin {
 		return MGD_Login_Settings::OPTION . '[' . $key . ']';
 	}
 
+	// Farbfeld: leer = Template-Standard, das Feld zeigt dann die Standardfarbe (data-custom=0)
 	private function color( array $s, string $key, string $label ): void {
+		$custom = '' !== (string) $s[ $key ];
+		$value  = $custom ? (string) $s[ $key ] : (string) ( $this->tpl_vars[ $key ] ?? '' );
 		echo '<p class="mgd-la-field"><label for="mgd-' . esc_attr( $key ) . '">' . esc_html( $label ) . '</label>';
-		echo '<input type="text" class="mgd-la-color" id="mgd-' . esc_attr( $key ) . '" name="' . esc_attr( $this->name( $key ) ) . '" value="' . esc_attr( (string) $s[ $key ] ) . '" data-key="' . esc_attr( $key ) . '" maxlength="7"></p>';
+		echo '<input type="text" class="mgd-la-color" data-mgd-color id="mgd-' . esc_attr( $key ) . '" name="' . esc_attr( $this->name( $key ) ) . '" value="' . esc_attr( $value ) . '" data-key="' . esc_attr( $key ) . '" data-custom="' . ( $custom ? '1' : '0' ) . '" maxlength="7"></p>';
 	}
 
 	private function number( array $s, string $key, string $label, int $min, int $max, string $unit, string $hint = '' ): void {
@@ -108,38 +101,6 @@ final class MGD_Login_Admin {
 		echo '<div class="notice notice-warning"><p><strong>' . esc_html( implode( ', ', $active ) ) . '</strong> ist auch aktiv und gestaltet ebenfalls die Login-Seite. Dann mischen sich beide Designs, zum Beispiel beim Logo. Bitte das andere Plugin unter <a href="' . esc_url( admin_url( 'plugins.php' ) ) . '">Plugins</a> deaktivieren.</p></div>';
 	}
 
-	public function plugins_page(): void {
-		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( 'Nicht berechtigt.', '', array( 'response' => 403 ) );
-		}
-		$list = self::recommendations();
-		// parent leer = kein eigener Menüpunkt, Lizenz bleibt aus
-		$dash = \Mgd\WordPressLogin\Kit\Platform\WordPress\Setup::dashboard( 'mgd-wordpress-login', 'wordpress', MGD_LOGIN_VERSION, 'MGD WordPress Login', MGD_Login_Plugin::$updater, $list, false, '' );
-		if ( null === $dash ) {
-			echo '<div class="wrap"><p>Die Seite konnte gerade nicht geladen werden.</p></div>';
-			return;
-		}
-		$dash->page();
-	}
-
-	// Ersatzliste falls theme.michael-gahn.de nicht antwortet, Texte aus dem Katalog
-	private static function fallback_plugins(): array {
-		$rows = array(
-			array( 'plugin-share-wordpress', 'MGD Share für WordPress', 'Datensparsames Teilen mit Link-Kopieren, Web Share und erst nach Klick geöffneten Zielplattformen.' ),
-			array( 'plugin-barrierefrei-wordpress', 'MGD Barrierefrei für WordPress', 'Bedienhilfe, anpassbares Modal und Generator für eine Erklärung zur Barrierefreiheit.' ),
-			array( 'plugin-maintenance-wordpress', 'MG Maintenance Studio für WordPress', 'Wartungsseiten, Vorschau und kontrollierte Veröffentlichung für WordPress.' ),
-			array( 'plugin-notification-wordpress', 'MGD Notification Center für WordPress', 'Öffentliche und persönliche Meldungen für WordPress, konfigurierbar im Menü, Footer, als Floating-Element oder per Shortcode.' ),
-			array( 'plugin-ki-kennzeichnung-wordpress', 'KI-Kennzeichnung für WordPress', 'WordPress-Plugin zur Kennzeichnung KI-generierter und KI-bearbeiteter Bilder.' ),
-			array( 'plugin-giveaway-wordpress', 'Giveaway-Formulare für WordPress', 'Formular-Builder für WordPress: Nach dem erfolgreichen Ausfüllen eines Formulars erhalten Besucher einen Download.' ),
-			array( 'plugin-wordpress-mcp', 'WordPress-MCP', 'WordPress-Plugin (MCP) zum Verwalten von WordPress-Projekten mit ChatGPT, Claude und weiteren KI-Assistenten.' ),
-		);
-		$out = array();
-		foreach ( $rows as $r ) {
-			$out[] = array( 'slug' => $r[0], 'name' => $r[1], 'description' => $r[2], 'version' => '' );
-		}
-		return $out;
-	}
-
 	public function page(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_die( 'Nicht berechtigt.', '', array( 'response' => 403 ) );
@@ -148,6 +109,7 @@ final class MGD_Login_Admin {
 		$all      = MGD_Login_Templates::all();
 		$unlocked = MGD_Login_Templates::pro_unlocked();
 		$current  = isset( $all[ $s['template'] ] ) ? $s['template'] : 'aurora';
+		$this->tpl_vars = MGD_Login_Templates::get( $current )['vars'];
 		?>
 		<div class="wrap mgd-la">
 			<header class="mgd-la-hero">

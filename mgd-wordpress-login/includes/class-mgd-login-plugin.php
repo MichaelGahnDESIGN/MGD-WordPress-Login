@@ -3,13 +3,15 @@ defined( 'ABSPATH' ) || exit;
 
 /** Startpunkt: hängt Frontend (Login-Seite) und Admin ein. */
 final class MGD_Login_Plugin {
-	// Updater vom Baukasten, setzt die Haupt-Datei - fürs Dashboard
+	public static ?MGD_Login_Admin $admin = null;
+	// Updater vom Baukasten, setzt die Haupt-Datei
 	public static ?\Mgd\WordPressLogin\Kit\Platform\WordPress\Updater $updater = null;
 
 	public static function boot(): void {
 		MGD_Login_Frontend::register();
 		if ( is_admin() ) {
-			( new MGD_Login_Admin() )->register();
+			self::$admin = new MGD_Login_Admin();
+			self::$admin->register();
 		}
 	}
 

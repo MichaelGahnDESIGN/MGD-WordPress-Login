@@ -6,13 +6,42 @@
 
 	var timer = 0;
 
+	// Farben: leer = Template-Standard. Feld zeigt dann die Standardfarbe (data-custom=0), geschickt wird dann leer
+	var colors = $('.mgd-la-color');
+	function tplId() { return (form.querySelector('input[name$="[template]"]:checked') || {}).value; }
+	function fillDefaults() {
+		var d = (MGDLogin.defaults || {})[tplId()] || {};
+		colors.each(function () {
+			if (this.getAttribute('data-custom') === '1' || !d[this.getAttribute('data-key')]) { return; }
+			this.value = d[this.getAttribute('data-key')];
+			// Farbknopf nachziehen, ohne dass das Feld als geändert gilt
+			var ev = new Event('input', { bubbles: false });
+			this.dispatchEvent(ev);
+		});
+	}
+	colors.on('input', function () { this.setAttribute('data-custom', '1'); });
+	// fillDefaults feuert input > danach wieder auf Standard stellen
+	function fillSilent() {
+		var keep = colors.filter('[data-custom="0"]');
+		fillDefaults();
+		keep.attr('data-custom', '0');
+	}
+	function blankDefaults() {
+		var changed = [];
+		colors.filter('[data-custom="0"]').each(function () { changed.push([this, this.value]); this.value = ''; });
+		return changed;
+	}
+	function restore(changed) { changed.forEach(function (c) { c[0].value = c[1]; }); }
+
 	// Vorschau: Formular kurz in den iframe schicken, danach alles zurücksetzen
 	function preview() {
 		var oldAction = form.getAttribute('action');
 		var oldTarget = form.getAttribute('target');
+		var changed = blankDefaults();
 		form.setAttribute('action', MGDLogin.previewUrl);
 		form.setAttribute('target', 'mgd-la-preview');
 		HTMLFormElement.prototype.submit.call(form);
+		restore(changed);
 		form.setAttribute('action', oldAction);
 		if (oldTarget === null) { form.removeAttribute('target'); } else { form.setAttribute('target', oldTarget); }
 	}
@@ -21,9 +50,12 @@
 		timer = setTimeout(function () { contrast(); preview(); }, 350);
 	}
 
-	// Farbwähler
-	$('.mgd-la-color').wpColorPicker({ change: later, clear: later });
+	// Farbwähler vom Baukasten (data-mgd-color) feuert input/change
 	$(form).on('input change', 'input, select, textarea', later);
+	// anderes Template > Standardfarben nachziehen
+	$(form).on('change', 'input[name$="[template]"]', fillSilent);
+	// Speichern: unveränderte Farben leer schicken
+	$(form).on('submit', function () { blankDefaults(); });
 
 	// Medien
 	$('.mgd-la-media').each(function () {
@@ -62,9 +94,8 @@
 
 	// Zurück auf Template-Standard (nur Farben und Maße)
 	$('#mgd-la-reset').on('click', function () {
-		$('.mgd-la-color').each(function () {
-			$(this).val('').closest('.wp-picker-container').find('.wp-color-result').css('background-color', '');
-		});
+		colors.attr('data-custom', '0');
+		fillSilent();
 		$.each(['radius', 'card_opacity', 'blur', 'card_width', 'overlay'], function (i, k) { $('#mgd-' + k).val(''); });
 		// Effekte zurück auf "Wie das Layout"
 		$.each(['particles', 'light', 'card_fx', 'position'], function (i, k) { $('#mgd-' + k).val(''); });
@@ -93,6 +124,7 @@
 		warn.hidden = r >= 4.5;
 	}
 
+	fillSilent();
 	contrast();
 	preview();
 })(jQuery);
