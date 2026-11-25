@@ -1,9 +1,10 @@
 # Änderungen
 
-## Unveröffentlicht (kommt mit 2.1.1)
+## [2.1.1] - 2026-11-25
 
+- Gemeinsame Verwaltung unter MGD Tools, einheitliche Darstellung, Icons.
 - Umbau auf **MGD Tools**: Die Einstellungen stehen jetzt unter dem gemeinsamen Menüpunkt „MGD Tools“. Das eigene Menü „MGD Login“ und die eigene Seite „Info und Updates“ sind weg. Die Seiten-Adresse `mgd-login-settings` bleibt gleich
-- Neuer Baukasten 1.12.1 (Übersicht und Updates, Weitere Plugins, Lizenz zentral, Farbwähler)
+- Neuer Baukasten 1.15.0 (Übersicht und Updates, Weitere Plugins, Lizenz zentral, Farbwähler)
 - Plugin heißt jetzt „MGD Login“. Neuer Plugin-Kopf, Icons 128 und 256
 - Farbfelder nutzen den MGD Farbwähler. „Leer = Standard vom Layout“ funktioniert wie bisher
 - Deine Einstellungen bleiben erhalten

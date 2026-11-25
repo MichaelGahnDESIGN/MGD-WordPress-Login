@@ -2,7 +2,7 @@
 
 Ein richtig schöner Login für WordPress. Du wählst ein Template, passt Farben, Logo und Hintergrund an und siehst das Ergebnis sofort live. Ohne Schriften-Download und ohne fremde Tracker.
 
-> Stand: Version 1.8.1. Getestet mit WordPress 6.x und PHP 8.5.
+> Stand: Version 2.1.1. Getestet mit WordPress 6.x und PHP 8.5.
 
 ## Was kann das Plugin?
 
@@ -81,7 +81,7 @@ Gut zu wissen:
 - Den Update-Stand siehst du auch unter **MGD Login → Info und Updates**.
 - Ein ZIP selbst hochladen (Plugins → Installieren → Plugin hochladen) geht weiterhin.
 - Ein Download-Link zu einer älteren Version auf GitHub wird bei aktivem Plugin abgelehnt. Ältere Versionen spielst du über **Plugin hochladen** ein.
-- Ab Version 1.7.0 laufen Updates über den gemeinsamen MGD-Baukasten. Beim Löschen des Plugins meldet es sich bei theme.michael-gahn.de ab.
+- Ab Version 2.1.1 laufen Updates über den gemeinsamen MGD-Baukasten. Beim Löschen des Plugins meldet es sich bei theme.michael-gahn.de ab.
 
 ## Datenschutz
 
