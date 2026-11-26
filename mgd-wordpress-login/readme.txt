@@ -3,7 +3,7 @@ Contributors: michaelgahndesign
 Tags: login, login page, custom login, design
 Requires at least: 6.5
 Requires PHP: 8.1
-Stable tag: 2.1.1
+Stable tag: 2.1.3
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,6 +31,9 @@ Updates kommen über theme.michael-gahn.de und GitHub. Vor dem Einspielen wird d
 4. Links im Menü erscheint „MGD Login“.
 
 == Changelog ==
+
+= 2.1.3 =
+* MGD Tools: Plugins an- und abschalten, Lizenz je Plugin.
 
 = 2.1.1 =
 * Gemeinsame Verwaltung unter MGD Tools, einheitliche Darstellung, Icons. Farbfelder mit MGD Farbwähler. Deine Einstellungen bleiben erhalten.
